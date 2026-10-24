@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="수능 1등급 달성이 쉬워지는 초격차 온라인 수능 학습 프로그램, 수능 옵티머스. 18,000+ 문항 AI 완전학습 시스템과 이용 안내.">
+<meta property="og:title" content="수능 옵티머스 | AI 완전학습 시스템">
+<meta property="og:description" content="수능 영어 1등급은 18,000+ 문항 끝에 있습니다. 학습 과정과 이용 방법을 한눈에.">
+<meta property="og:type" content="website">
+<title>수능 옵티머스</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800;900&family=IBM+Plex+Sans+KR:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap">
+<style>
+/* Layout: one committed look — night-navy bands for the pitch, cool paper bands for the proof and the how-to.
+   Numbers are the hero: 18,000+ is set larger than any headline. */
+:root {
+  --night: #0b1026;
+  --night-2: #141b3d;
+  --night-line: rgba(255, 255, 255, .12);
+  --paper: #f3f5fb;
+  --card: #ffffff;
+  --ink: #161c38;
+  --muted: #5b6386;
+  --line: #dfe3f0;
+  --blue: #2f8cff;
+  --violet: #8a4dff;
+  --grad: linear-gradient(95deg, #2f8cff 0%, #6b6bff 55%, #9b4dff 100%);
+  --gold: #ffe27a;
+  --rose: #ff5c8a;
+  --good: #1fa86b;
+  --bad: #e5484d;
+  --chip: #12172f;
+  --scrim: rgba(10, 14, 34, .55);
+  --font-head: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-num: "Montserrat", "Gothic A1", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.65; word-break: keep-all; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--night); }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, h4 { font-family: var(--font-head); margin: 0; line-height: 1.25; text-wrap: balance; letter-spacing: -.02em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 720px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding: .14em 0 .06em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.eyebrow { font-family: var(--font-num); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+
+/* Sticky nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 8; background: rgba(11, 16, 38, .92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--night-line); }
+.nav .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+.nav .wrap::-webkit-scrollbar { display: none; }
+.nav a { flex: none; text-decoration: none; color: #c9cfee; font-size: 14px; font-weight: 500; padding: 6px 13px; border-radius: 999px; border: 1px solid var(--night-line); }
+.nav a.on { background: #fff; color: var(--night); border-color: #fff; }
+.nav a.start { border-color: transparent; background: var(--grad); color: #fff; }
+
+/* Bands */
+.band { padding-block: 64px; }
+.band.dark { background: var(--night); color: #e8ebfa; }
+.band.dark .muted { color: #a3abd3; }
+.band h2 { font-size: clamp(26px, 6.4vw, 38px); font-weight: 900; }
+.band .lead { font-size: 16px; color: var(--muted); margin-top: 12px; max-width: 34em; }
+.band.dark .lead { color: #a3abd3; }
+.band .eyebrow { margin-bottom: 14px; color: var(--violet); }
+.band.dark .eyebrow { color: #9fa9ff; }
+section { scroll-margin-top: 56px; }
+#faq { min-height: 100vh; }
+
+/* HERO */
+.hero { position: relative; overflow: hidden; background: var(--night); color: #fff; padding-block: 44px 56px; }
+.hero::before {
+  content: ""; position: absolute; inset: -30% -20% auto auto; width: 520px; height: 520px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(138, 77, 255, .45), transparent); pointer-events: none;
+}
+.hero::after {
+  content: ""; position: absolute; inset: auto auto -35% -25%; width: 520px; height: 520px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(47, 140, 255, .35), transparent); pointer-events: none;
+}
+.hero .wrap { position: relative; z-index: 1; display: grid; gap: 22px; }
+.hero .who { font-size: 13px; color: #a3abd3; }
+.hero .badge { justify-self: start; font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(159, 169, 255, .45); color: #cfd4ff; }
+.hero h1 { font-size: clamp(34px, 9.4vw, 60px); font-weight: 900; line-height: 1.12; }
+.hero h1 .big { display: block; font-family: var(--font-num); font-weight: 800; font-size: 1.5em; letter-spacing: -.04em; line-height: 1; margin: 6px 0 4px; }
+.hero .sub { font-size: 17px; color: #c9cfee; max-width: 30em; }
+.hero .sub b { color: #fff; }
+.hero .banner { border-radius: 16px; overflow: hidden; border: 1px solid var(--night-line); box-shadow: 0 20px 50px rgba(0, 0, 0, .45); }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: 15px; padding: 13px 20px; border-radius: 12px; border: 0; cursor: pointer; font-family: var(--font-body); }
+.btn.primary { background: var(--grad); color: #fff; box-shadow: 0 10px 26px rgba(107, 107, 255, .4); }
+.btn.ghost { background: rgba(255, 255, 255, .08); color: #fff; border: 1px solid var(--night-line); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+.stat { border: 1px solid var(--night-line); border-radius: 14px; padding: 14px 12px; background: rgba(255, 255, 255, .04); display: grid; gap: 2px; }
+.stat .num { font-size: clamp(20px, 5.6vw, 30px); font-weight: 800; color: var(--gold); line-height: 1.1; white-space: nowrap; }
+.stat .num small { font-family: var(--font-head); font-size: .62em; font-weight: 800; margin-left: 2px; }
+.stat .lbl { font-size: 12.5px; color: #a3abd3; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* 18,000+ 모션: 숫자가 올라가며 그라데이션 빛이 흐르고, 끝나면 한 번 반짝 */
+.mega { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 6px; }
+.mega-num {
+  font-size: clamp(40px, 11.5vw, 96px); font-weight: 800; line-height: 1.05; letter-spacing: -.045em; padding: .06em 0;
+  background: linear-gradient(95deg, #2f8cff 0%, #6b6bff 30%, #b7a6ff 45%, #6b6bff 60%, #9b4dff 100%);
+  background-size: 220% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: megaIn .9s cubic-bezier(.2, .8, .2, 1) both, shine 3.2s ease-in-out 1.6s infinite;
+  filter: drop-shadow(0 6px 28px rgba(107, 107, 255, .45));
+}
+.mega-label { font-family: var(--font-head); font-weight: 900; font-size: clamp(17px, 4.8vw, 38px); color: var(--gold); letter-spacing: -.03em; animation: megaIn .9s .25s cubic-bezier(.2, .8, .2, 1) both; }
+.mega.done .mega-num { animation: pop .5s ease-out, shine 3.2s ease-in-out .6s infinite; }
+@keyframes megaIn { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes shine { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+@keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.06); } 100% { transform: scale(1); } }
+
+/* Problem */
+.myths { display: grid; gap: 12px; margin-top: 28px; }
+.myth { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 18px; border-radius: 16px; background: var(--night-2); border: 1px solid var(--night-line); }
+.myth .x { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: rgba(229, 72, 77, .16); color: #ff8a8e; font-weight: 800; }
+.myth h3 { font-size: 19px; font-weight: 800; color: #fff; }
+.myth p { color: #a3abd3; font-size: 15px; margin-top: 4px; }
+.problem-title .zeoldae { color: var(--gold); font-style: normal; }
+
+/* Solution */
+.yes { margin-top: 40px; padding: 28px 22px; border-radius: 20px; background: linear-gradient(160deg, #1b2457, #12183a); border: 1px solid rgba(159, 169, 255, .3); }
+.yes h3 { font-size: clamp(24px, 6vw, 32px); font-weight: 900; color: #fff; }
+.pillars { display: grid; gap: 18px; margin-top: 22px; }
+.pillar { display: grid; gap: 6px; padding-left: 16px; border-left: 3px solid; border-image: var(--grad) 1; }
+.pillar h4 { font-size: 18px; font-weight: 800; color: #fff; }
+.pillar p { font-size: 15px; color: #c3c9ea; }
+.pillar mark { background: rgba(255, 226, 122, .18); color: var(--gold); padding: 0 3px; border-radius: 4px; }
+
+/* Volume chain */
+.chain { margin-top: 28px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.link { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 2px; position: relative; }
+.link .label { font-size: 13px; font-weight: 700; color: var(--muted); }
+.link .num { font-size: 34px; font-weight: 800; line-height: 1.1; color: var(--ink); }
+.link small { font-size: 12.5px; color: var(--muted); }
+.link.total { grid-column: 1 / -1; background: var(--night); border-color: var(--night); color: #fff; padding: 22px 20px; }
+.link.total .label { color: #9fa9ff; }
+.link.total .num { font-size: clamp(54px, 15vw, 84px); color: var(--gold); }
+.link.total small { color: #a3abd3; font-size: 14px; }
+
+/* Curriculum */
+.levels { display: grid; gap: 12px; margin-top: 28px; }
+.level { border-radius: 18px; padding: 20px; color: #fff; display: grid; gap: 10px; }
+.level.l1 { background: linear-gradient(135deg, #3f7fd6, #5b8fe0); }
+.level.l2 { background: linear-gradient(135deg, #4b55b8, #5d5fc4); }
+.level.l3 { background: linear-gradient(135deg, #5b3fa6, #7b4fc4); }
+.level-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.level h3 { font-family: var(--font-head); font-size: 26px; font-weight: 900; color: var(--gold); }
+.level .diff { font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: rgba(255, 255, 255, .18); }
+.level p { font-size: 15px; color: #eef0ff; }
+.route { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-family: var(--font-num); font-size: 13px; font-weight: 700; }
+.route span { background: rgba(255, 255, 255, .16); padding: 4px 9px; border-radius: 8px; }
+.route span.fin { background: var(--gold); color: var(--night); font-family: var(--font-head); }
+.route i { font-style: normal; opacity: .7; }
+.meter { display: flex; gap: 4px; }
+.meter b { flex: 1; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .25); }
+.meter b.on { background: var(--gold); }
+
+/* CATCH tabs */
+.catch-tabs { display: flex; gap: 6px; overflow-x: auto; margin-top: 26px; padding-bottom: 4px; scrollbar-width: none; }
+.catch-tabs::-webkit-scrollbar { display: none; }
+.catch-tabs button {
+  flex: none; font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--muted); cursor: pointer;
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 9px 14px; display: grid; gap: 0; text-align: left;
+}
+.catch-tabs button small { font-family: var(--font-num); font-size: 10.5px; letter-spacing: .08em; font-weight: 700; opacity: .8; }
+.catch-tabs button[aria-selected="true"] { background: var(--night); color: #fff; border-color: var(--night); }
+.catch-panel { margin-top: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.catch-head { padding: 22px 20px 18px; color: #fff; display: grid; gap: 6px; }
+.catch-head .num { font-size: clamp(40px, 11vw, 60px); font-weight: 800; color: var(--gold); line-height: 1; }
+.catch-head h3 { font-size: 22px; font-weight: 900; }
+.catch-head p { font-size: 14.5px; color: rgba(255, 255, 255, .85); }
+.catch-body { padding: 18px 20px 22px; display: grid; gap: 14px; }
+.steps-mini { display: grid; gap: 6px; }
+.steps-mini div { display: grid; grid-template-columns: 92px 1fr; gap: 10px; font-size: 14.5px; padding: 9px 12px; border-radius: 10px; background: var(--paper); }
+.steps-mini b { font-weight: 700; color: var(--muted); }
+.types { display: flex; flex-wrap: wrap; gap: 6px; }
+.types span { font-size: 12.5px; padding: 3px 9px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); }
+.sample { border-radius: 14px; border: 8px solid #2c2f3a; background: #2c2f3a; overflow: hidden; cursor: zoom-in; padding: 0; display: block; width: 100%; }
+.sample img { width: 100%; background: #fff; }
+.cap { font-size: 13px; color: var(--muted); font-weight: 700; }
+
+/* TOP 7 */
+.top7 { display: grid; gap: 14px; margin-top: 28px; counter-reset: t; }
+.t7 { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 22px 20px; display: grid; gap: 10px; }
+.t7 .no { font-family: var(--font-num); font-weight: 800; font-size: 44px; line-height: 1; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.t7 .kicker { font-size: 14px; font-weight: 700; color: var(--muted); }
+.t7 h3 { font-size: 24px; font-weight: 900; }
+.t7 h3 + .tag { font-size: 15px; font-weight: 700; color: var(--violet); }
+.t7 p { font-size: 15px; color: #3a4166; }
+.t7 mark { background: #fff1bf; color: inherit; padding: 0 3px; border-radius: 4px; }
+.t7.dark { background: var(--night); border-color: var(--night); color: #fff; }
+.t7.dark .kicker { color: #a3abd3; }
+.t7.dark p { color: #c3c9ea; }
+.t7.dark mark { background: rgba(255, 226, 122, .18); color: var(--gold); }
+.t7.dark h3 + .tag { color: #b6a4ff; }
+.track { display: grid; gap: 8px; margin-top: 4px; }
+.track > div { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 14px 16px; border-radius: 14px; background: rgba(255, 255, 255, .06); border: 1px solid var(--night-line); }
+.track > div > div { min-width: 0; }
+.track .s { font-family: var(--font-num); font-weight: 800; color: var(--gold); font-size: 13px; padding-top: 2px; white-space: nowrap; }
+.track h4 { font-size: 16px; font-weight: 800; color: #fff; }
+.track p { font-size: 14px; margin-top: 2px; }
+.shot-img { border-radius: 12px; border: 1px solid var(--line); overflow: hidden; cursor: zoom-in; padding: 0; background: #fff; display: block; width: 100%; }
+.duo { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.grade-pill { display: grid; grid-template-columns: 88px 1fr; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: var(--paper); }
+.grade-pill .num { font-size: 36px; font-weight: 800; line-height: 1; text-align: center; }
+.grade-pill > span:last-child { font-size: 14px; color: var(--muted); line-height: 1.5; min-width: 0; }
+@media (min-width: 640px) { .duo { grid-template-columns: 1fr 1fr; } }
+
+/* HOW-TO */
+.how { background: #fff; }
+.player { margin-top: 26px; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 16px; display: grid; gap: 14px; justify-items: center; }
+.player-head { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.player-head strong { font-family: var(--font-head); font-weight: 900; font-size: 18px; }
+.player-head span { font-size: 13px; color: var(--muted); }
+.bars { width: 100%; display: flex; gap: 4px; }
+.bars button { flex: 1; height: 16px; padding: 6px 0; border: 0; background: none; cursor: pointer; }
+.bars button span { display: block; height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.bars button i { display: block; height: 100%; width: 0; background: var(--grad); }
+.pstage { position: relative; width: 100%; }
+.browser { border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 16px 40px rgba(22, 28, 56, .14); }
+.browser-bar { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #eceff7; border-bottom: 1px solid var(--line); }
+.browser-bar i { width: 9px; height: 9px; border-radius: 50%; background: #c9cee0; }
+.browser-bar span { margin-left: 8px; font-size: 11.5px; color: var(--muted); font-family: var(--font-num); font-weight: 600; }
+.pscreen { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity .45s ease; background: var(--slide-bg, #fff); }
+.slide.on { opacity: 1; }
+.layer { position: relative; width: 100%; }
+.layer img { width: 100%; }
+.slide .spot { opacity: 0; transition: opacity .35s ease; }
+.slide.cue .spot { opacity: 1; }
+.spot {
+  position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: calc(var(--w) * 1%); height: calc(var(--h) * 1%);
+  border-radius: var(--r, 8px); pointer-events: none;
+  box-shadow: 0 0 0 2.5px var(--rose), 0 0 0 6px rgba(255, 92, 138, .28);
+}
+.spot.dim { box-shadow: 0 0 0 2.5px var(--rose), 0 0 0 6px rgba(255, 92, 138, .28), 0 0 0 200vmax var(--scrim); }
+.spot::after { content: ""; position: absolute; inset: -2px; border-radius: inherit; border: 2px solid var(--rose); animation: ping 1.8s ease-out infinite; }
+@keyframes ping { 0% { opacity: .9; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(1.3); } }
+.tip { position: absolute; left: 50%; transform: translateX(-50%); top: calc(100% + 10px); background: var(--chip); color: #fff; font: 700 12px/1 var(--font-body); padding: 7px 10px; border-radius: 8px; white-space: nowrap; box-shadow: 0 6px 16px rgba(0, 0, 0, .25); }
+.tip::before { content: ""; position: absolute; left: 50%; top: -5px; margin-left: -5px; border: 5px solid transparent; border-top: 0; border-bottom-color: var(--chip); }
+.tip.up { top: auto; bottom: calc(100% + 10px); }
+.tip.up::before { top: auto; bottom: -5px; border-bottom: 0; border-top: 5px solid var(--chip); }
+.tip.end { left: auto; right: 0; transform: none; }
+.tip.end::before { left: auto; right: 14px; margin-left: 0; }
+.tip.start { left: 0; transform: none; }
+.tip.start::before { left: 14px; margin-left: 0; }
+.tap { position: absolute; left: 50%; top: 50%; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%; background: rgba(255, 255, 255, .85); box-shadow: 0 0 0 2px var(--rose); opacity: 0; pointer-events: none; }
+.slide.tapped .tap { animation: tap .7s ease-out 1; }
+@keyframes tap { 0% { opacity: 0; transform: scale(1.6); } 35% { opacity: 1; transform: scale(.8); } 100% { opacity: 0; transform: scale(1.9); } }
+.pbig { position: absolute; left: 50%; top: 58%; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%; border: 0; cursor: pointer; background: var(--grad); box-shadow: 0 0 0 8px rgba(107, 107, 255, .25), 0 10px 26px rgba(0, 0, 0, .3); display: grid; place-items: center; }
+.pbig::after { content: ""; border-left: 21px solid #fff; border-top: 13px solid transparent; border-bottom: 13px solid transparent; margin-left: 6px; }
+.pbig.replay::after { border: 4px solid #fff; border-left-color: transparent; border-radius: 50%; width: 22px; height: 22px; margin: 0; }
+.pcap { width: 100%; display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; min-height: 126px; align-content: start; }
+.pcap .n { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--rose); color: #fff; font: 700 12px/1 var(--font-num); }
+.pcap #ptitle { display: block; font-size: 14px; font-weight: 700; color: var(--violet); }
+.pcap #pdesc { display: block; font-size: 15.5px; line-height: 1.55; margin-top: 2px; }
+.pctl { display: flex; gap: 8px; }
+.pctl button { font: 500 14px/1 var(--font-body); padding: 10px 16px; border-radius: 999px; cursor: pointer; border: 1px solid var(--line); background: #fff; color: var(--ink); }
+.pctl button.primary { background: var(--night); border-color: var(--night); color: #fff; }
+
+.steps { display: grid; gap: 14px; margin-top: 26px; }
+.step { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--paper); scroll-margin-top: 60px; }
+.step-head { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 16px 16px 14px; background: #fff; }
+.step-head .n { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--rose); color: #fff; font: 700 14px/1 var(--font-num); }
+.step-head h3 { font-size: 19px; font-weight: 800; }
+.step-head p { font-size: 15px; color: var(--muted); margin-top: 2px; }
+.key { background: #efe9ff; color: var(--violet); padding: 0 6px; border-radius: 5px; font-weight: 700; }
+.step .frame { padding: 16px; }
+.step .frame .browser { box-shadow: 0 8px 24px rgba(22, 28, 56, .1); }
+.step .frame .screen { position: relative; overflow: hidden; }
+.zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: left; }
+.alarm { border: 2px solid var(--rose); background: #fff0f4; border-radius: 16px; padding: 16px 18px; display: grid; gap: 4px; }
+.alarm strong { font-family: var(--font-head); font-weight: 900; font-size: 18px; color: #d83265; }
+.alarm p { font-size: 15px; }
+.rules { display: grid; gap: 10px; margin-top: 14px; }
+.rule { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 14px 16px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); }
+.rule .ic { width: 28px; height: 28px; border-radius: 8px; background: var(--night); color: var(--gold); display: grid; place-items: center; font: 800 13px/1 var(--font-num); }
+.rule h4 { font-size: 16px; font-weight: 800; }
+.rule p { font-size: 14.5px; color: var(--muted); margin-top: 2px; }
+.lvtable { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+.lvtable table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.lvtable th, .lvtable td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.lvtable th { background: var(--night); color: #fff; font-weight: 500; font-size: 13px; }
+.lvtable tr:last-child td { border-bottom: 0; }
+.lv-note { color: var(--muted); font-size: 13px; }
+
+/* FAQ */
+.faq { display: grid; gap: 8px; margin-top: 22px; }
+.faq details { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.faq summary { list-style: none; cursor: pointer; padding: 15px 16px; font-weight: 700; font-size: 15.5px; display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before { content: "Q"; font-family: var(--font-num); font-weight: 800; color: var(--violet); }
+.faq summary::after { content: ""; width: 9px; height: 9px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); margin: 0 4px 4px 0; transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(-135deg); margin-bottom: -4px; }
+.faq .a { padding: 0 16px 16px 38px; font-size: 15px; color: #3a4166; }
+
+/* Closing */
+.closing { text-align: center; }
+.closing h2 { font-size: clamp(28px, 7.4vw, 44px); }
+.closing .cta { justify-content: center; margin-top: 22px; }
+footer { background: var(--night); color: #8a92bd; font-size: 13px; text-align: center; padding-block: 0 40px; }
+
+/* Lightbox */
+.lb { position: fixed; inset: 0; z-index: 20; background: rgba(6, 9, 22, .94); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lb img { max-height: 86vh; max-width: 100%; border-radius: 10px; background: #fff; }
+.lb .screen { border-radius: 10px; background: #fff; }
+.lb .tip { font-size: 14px; padding: 9px 12px; }
+.lb button { position: absolute; top: calc(12px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); font: 500 15px/1 var(--font-body); background: #fff; color: #111; border: 0; border-radius: 999px; padding: 9px 15px; cursor: pointer; }
+
+@media (min-width: 640px) {
+  .chain { grid-template-columns: repeat(4, 1fr); }
+  .myths { grid-template-columns: repeat(3, 1fr); }
+  .myth { grid-template-columns: 1fr; }
+}
+@media (max-width: 360px) { .stats { grid-template-columns: 1fr; } .duo { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .mega-num, .mega-label, .mega.done .mega-num { animation: none; } .spot::after { animation: none; opacity: 0; } html { scroll-behavior: auto; } .faq summary::after { transition: none; } }
+html { scroll-behavior: smooth; }
+</style>
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; }</style>
+</head>
+<body>
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1 class="sr-only">수능 옵티머스 · 수능 1등급을 위한 AI 완전학습 시스템</h1>
+    <img class="banner" src="img/hero-banner.png" alt="수능 1등급을 위한 AI 완전학습 시스템, 수능 OPTIMUS" width="539" height="197">
+    <div class="mega">
+      <span class="mega-num num"><span data-count="18000" data-dur="1800">18,000</span>+</span>
+      <span class="mega-label">압도적인 문항수</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="num" data-count="13500">13,500</span><span class="lbl">VOCA 단어</span></div>
+      <div class="stat"><span class="num" data-count="5670">5,670</span><span class="lbl">듣기·독해 문항</span></div>
+      <div class="stat"><span class="num"><span data-count="15">15</span><small>회</small></span><span class="lbl">수능 Final 실전모의고사</span></div>
+    </div>
+    <p class="sub">수능 1등급 달성이 쉬워지는 <b>초격차 온라인 수능 학습 프로그램</b>, 수능 옵티머스. 스스로 풀고, 틀린 문제는 맞힐 때까지 다시 풀고, 약점만 골라 집중 훈련합니다.</p>
+  </div>
+</header>
+
+<nav class="nav" aria-label="목차">
+  <div class="wrap">
+    <a href="#why" class="on">WHY OPTIMUS</a>
+    <a href="#volume">훈련량</a>
+    <a href="#course">학습 과정</a>
+    <a href="#catch">CATCH</a>
+    <a href="#top7">TOP 7</a>
+    <a href="#start" class="start">이용 안내</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<main>
+  <section class="band dark" id="why">
+    <div class="wrap">
+      <p class="eyebrow">Why Optimus</p>
+      <h2 class="problem-title">가짜 공부로는 <em class="zeoldae">“절대”</em><br>1등급의 벽을 넘을 수 없습니다</h2>
+      <div class="myths">
+        <div class="myth"><span class="x">✕</span><div><h3>착각하는 공부</h3><p>선생님이 칠판에서 풀어주는 문제를 보고 온전히 내 실력이라 착각합니다.</p></div></div>
+        <div class="myth"><span class="x">✕</span><div><h3>단절된 오답 학습</h3><p>틀린 문제를 해설지만 보고 넘어가면 다음 시험에서도 똑같은 유형을 또 틀립니다.</p></div></div>
+        <div class="myth"><span class="x">✕</span><div><h3>비효율적인 약점 학습</h3><p>내가 진짜 약한 유형을 모른 채 쉬운 문제, 아는 문제만 반복하며 공부했다고 착각합니다.</p></div></div>
+      </div>
+
+      <div class="yes">
+        <p class="eyebrow">Optimus can</p>
+        <h3>수능 옵티머스는 <span class="grad-text">가능합니다!</span></h3>
+        <div class="pillars">
+          <div class="pillar"><h4>능동적 문제 해결 학습</h4><p>정답만 확인하는 게 아니라, 스스로 풀고 해설과 비교하며 놓친 개념과 오류 지점을 정확히 짚어냅니다. <mark>‘혼자 힘으로 해결할 수 있는가’</mark>가 실력의 기준입니다.</p></div>
+          <div class="pillar"><h4>연결되는 오답 복습 시스템</h4><p>틀린 문제는 완전히 이해할 때까지 반복 응시합니다. 원리를 이해한 풀이로 이어져, 실전에서 유사 유형을 만나도 <mark>흔들리지 않는 실력</mark>을 만듭니다.</p></div>
+          <div class="pillar"><h4>데이터 기반 약점 집중 학습</h4><p>어휘, 듣기, 독해 등 영역별 오답 패턴을 분석해 나의 취약점을 정확히 찾고, <mark>최단 시간 안에 실질적인 실력 향상</mark>을 이끌어냅니다.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="volume">
+    <div class="wrap">
+      <p class="eyebrow">Training Volume</p>
+      <h2>1등급을 결정짓는<br><span class="grad-text">압도적인 훈련량</span></h2>
+      <p class="lead">단계 하나하나를 완벽히 클리어해야 다음으로 넘어갑니다. 그렇게 쌓이는 훈련의 총량입니다.</p>
+      <div class="chain">
+        <div class="link"><span class="label">단계</span><span class="num" data-count="225">225</span><small>1~5단계로 구성</small></div>
+        <div class="link"><span class="label">CATCH</span><span class="num" data-count="45">45</span><small>5개 영역으로 구성</small></div>
+        <div class="link"><span class="label">STAGE</span><span class="num" data-count="9">9</span><small>레벨별 3개로 구성</small></div>
+        <div class="link"><span class="label">실전모의고사</span><span class="num" data-count="15">15</span><small>레벨별 5회로 구성</small></div>
+        <div class="link total"><span class="label">압도적 문항수</span><span class="num"><span data-count="18000">18,000</span>+</span><small>단어, 듣기, 독해 전체 문항 수</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark" id="course">
+    <div class="wrap">
+      <p class="eyebrow">Curriculum</p>
+      <h2>난이도별 맞춤형<br>3단계 레벨업 커리큘럼</h2>
+      <p class="lead">학생의 실력에 맞춰 레벨이 정해지고, 각 레벨은 STAGE 3개와 Final 실전모의고사로 끝납니다.</p>
+      <div class="levels">
+        <article class="level l1">
+          <div class="level-top"><h3>옵티머스 1</h3><span class="diff">난이도 중 · 고1~고2 수준</span></div>
+          <div class="meter" aria-label="난이도 3단계 중 1"><b class="on"></b><b></b><b></b></div>
+          <p>수능 영어, 1등급으로 가는 첫 번째 관문!</p>
+          <div class="route"><span>STAGE 1</span><i>›</i><span>STAGE 2</span><i>›</i><span>STAGE 3</span><i>›</i><span class="fin">Final 실전모의고사</span></div>
+        </article>
+        <article class="level l2">
+          <div class="level-top"><h3>옵티머스 2</h3><span class="diff">난이도 상 · 고2~고3 수준</span></div>
+          <div class="meter" aria-label="난이도 3단계 중 2"><b class="on"></b><b class="on"></b><b></b></div>
+          <p>정답의 논리를 찾는 압도적 실전 훈련!</p>
+          <div class="route"><span>STAGE 4</span><i>›</i><span>STAGE 5</span><i>›</i><span>STAGE 6</span><i>›</i><span class="fin">Final 실전모의고사</span></div>
+        </article>
+        <article class="level l3">
+          <div class="level-top"><h3>옵티머스 PRO</h3><span class="diff">난이도 최상 · 고3 수준</span></div>
+          <div class="meter" aria-label="난이도 3단계 중 3"><b class="on"></b><b class="on"></b><b class="on"></b></div>
+          <p>흔들리지 않는 수능 영어의 무결점 완성!</p>
+          <div class="route"><span>STAGE 7</span><i>›</i><span>STAGE 8</span><i>›</i><span>STAGE 9</span><i>›</i><span class="fin">Final 실전모의고사</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="catch">
+    <div class="wrap">
+      <p class="eyebrow">Stage = 5 Catches</p>
+      <h2>하나씩, 확실하게.<br>모든 영역을 <span class="grad-text">CATCH</span>하라!</h2>
+      <p class="lead">STAGE 하나는 VOCA → 듣기 → 독해 3 → 독해 2 → 독해 1, 다섯 개의 CATCH로 이루어지고, 각 CATCH는 1~5단계입니다.</p>
+
+      <div class="catch-tabs" role="tablist" aria-label="CATCH 종류">
+        <button type="button" role="tab" id="ct-1" aria-controls="cp-1" aria-selected="true"><small>CATCH 1</small>VOCA</button>
+        <button type="button" role="tab" id="ct-2" aria-controls="cp-2" aria-selected="false"><small>CATCH 2</small>듣기</button>
+        <button type="button" role="tab" id="ct-3" aria-controls="cp-3" aria-selected="false"><small>CATCH 3·4·5</small>독해</button>
+        <button type="button" role="tab" id="ct-4" aria-controls="cp-4" aria-selected="false"><small>FINAL</small>실전모의고사</button>
+      </div>
+
+      <div class="catch-panel" role="tabpanel" id="cp-1" aria-labelledby="ct-1">
+        <div class="catch-head" style="background:#4f6a95"><span class="num"><span data-count="13500">13,500</span> 단어</span><h3>완벽 마스터 엔진</h3><p>9개 STAGE를 통해 총 13,500 단어를 학습합니다. (STAGE당 1,500 단어)</p></div>
+        <div class="catch-body">
+          <div class="steps-mini"><div><b>1~3단계</b><span>단어 뜻 고르기</span></div><div><b>4단계</b><span>반의어, 유의어 고르기</span></div><div><b>5단계</b><span>숙어 빈칸 채우기</span></div></div>
+          <p class="cap">실제 문제 · 동의어 고르기</p>
+          <button type="button" class="sample" data-img><img src="img/q-voca-syn.jpg" alt="VOCA 동의어 고르기 문제 화면" width="711" height="562" loading="lazy"></button>
+          <p class="cap">실제 문제 · 문장에 사용된 단어 뜻 고르기</p>
+          <button type="button" class="sample" data-img><img src="img/q-voca-mean.jpg" alt="VOCA 문장 속 단어 뜻 고르기 문제 화면" width="718" height="604" loading="lazy"></button>
+        </div>
+      </div>
+      <div class="catch-panel" role="tabpanel" id="cp-2" aria-labelledby="ct-2" hidden>
+        <div class="catch-head" style="background:#9b6f8c"><span class="num"><span data-count="1530">1,530</span> 문항</span><h3>듣기 완전 정복</h3><p>9개 STAGE를 통해 총 1,530 문항을 학습합니다. (STAGE당 170 문항)</p></div>
+        <div class="catch-body">
+          <div class="steps-mini"><div><b>1~5단계</b><span>수능 유형 1~17번 · 만점 목표 문제 유형</span></div></div>
+          <div class="types"><span>목적 추론</span><span>의견 추론</span><span>요지 파악</span><span>그림 정보 파악</span><span>할 일 파악</span><span>수치 정보 파악</span><span>이유 추론</span><span>언급하지 않은 것</span><span>내용 일치/불일치</span><span>표 내용 파악</span><span>이어질 응답 추론</span><span>상황에 적절한 말</span><span>묶음 문항</span></div>
+          <p class="cap">실제 문제 · 이어질 응답 추론</p>
+          <button type="button" class="sample" data-img><img src="img/q-listen.jpg" alt="듣기 이어질 응답 추론 문제 화면" width="731" height="375" loading="lazy"></button>
+        </div>
+      </div>
+      <div class="catch-panel" role="tabpanel" id="cp-3" aria-labelledby="ct-3" hidden>
+        <div class="catch-head" style="background:#566b5c"><span class="num"><span data-count="4140">4,140</span> 문항</span><h3>실전 독해 완성</h3><p>9개 STAGE를 통해 총 4,140 문항을 학습합니다. (STAGE당 460 문항) 각 CATCH 1~5단계, 수능 유형 18~45번.</p></div>
+        <div class="catch-body">
+          <div class="steps-mini">
+            <div><b>CATCH 3</b><span><b style="color:var(--ink)">3등급 목표 유형</b> · 목적, 심경변화, 주장, 함축적 의미, 요지, 주제, 제목, 도표, 세부내용, 실용문, 어법, 장문</span></div>
+            <div><b>CATCH 4</b><span><b style="color:var(--ink)">2등급 목표 유형</b> · 무관한 문장, 글의 순서, 문장 삽입, 요약문 완성, 장문</span></div>
+            <div><b>CATCH 5</b><span><b style="color:var(--ink)">1등급 목표 유형</b> · 어휘, 빈칸 추론</span></div>
+          </div>
+          <p class="cap">실제 문제 · 빈칸 추론 (목표시간과 풀이시간이 함께 표시돼요)</p>
+          <button type="button" class="sample" data-img><img src="img/q-reading-blank.jpg" alt="독해 빈칸 추론 문제 화면" width="731" height="648" loading="lazy"></button>
+          <p class="cap">실제 문제 · 무관한 문장</p>
+          <button type="button" class="sample" data-img><img src="img/q-reading-irr.jpg" alt="독해 무관한 문장 문제 화면" width="732" height="524" loading="lazy"></button>
+        </div>
+      </div>
+      <div class="catch-panel" role="tabpanel" id="cp-4" aria-labelledby="ct-4" hidden>
+        <div class="catch-head" style="background:#9a7564"><span class="num"><span data-count="15">15</span>회</span><h3>수능 최종 완성 · Final 실전모의고사</h3><p>실전과 동일한 환경에서 반복 훈련해 수능 당일의 긴장감까지 통제합니다.</p></div>
+        <div class="catch-body">
+          <div class="steps-mini">
+            <div><b>오픈 조건</b><span>STAGE 3개를 완료하면 열립니다</span></div>
+            <div><b>레벨당 5회</b><span>각 옵티머스 레벨마다 5회 제공</span></div>
+            <div><b>총 15회</b><span>전체 675 문항을 실전과 똑같이 응시</span></div>
+          </div>
+          <p class="cap">실제 문제 · 문장 삽입</p>
+          <button type="button" class="sample" data-img><img src="img/q-final-insert.jpg" alt="실전모의고사 문장 삽입 문제 화면" width="715" height="555" loading="lazy"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="top7" style="padding-top:8px">
+    <div class="wrap">
+      <p class="eyebrow">Top 7</p>
+      <h2>수능 옵티머스<br>TOP 7 핵심 강점</h2>
+      <div class="top7">
+        <article class="t7">
+          <span class="no">01</span><p class="kicker">수업이 끝난 후에도 공부는 멈추지 않습니다</p>
+          <h3>자기주도 학습의 완성</h3>
+          <p>스스로 부족한 단계를 채워나가는 <mark>진짜 자기주도 학습 습관</mark>을 형성합니다.</p>
+        </article>
+        <article class="t7 dark">
+          <span class="no">02</span><p class="kicker">스스로 깨닫는 스파르타 완전학습</p>
+          <h3>끝까지 밀어붙이는 집중 학습</h3>
+          <p>수능 옵티머스는 학생 스스로 찾아낼 때까지 <mark>정답을 주지 않습니다.</mark></p>
+        </article>
+        <article class="t7">
+          <span class="no">03</span><p class="kicker">공부가 게임이 되는 마법</p>
+          <h3>몰입도 극대화 구조</h3>
+          <p>현재 단계를 <mark>완벽히 클리어해야만</mark> 다음 단계로 넘어갈 수 있는 시스템이 <mark>승부욕과 성취감</mark>을 강렬하게 자극합니다.</p>
+        </article>
+        <article class="t7 dark">
+          <span class="no">04</span><p class="kicker">정답률 100%를 향한</p>
+          <h3>3단계 무한 추적 시스템</h3>
+          <div class="track">
+            <div><span class="s">STEP 1</span><div><h4>즉각적인 피드백</h4><p>문제를 제출하는 즉시 자동 채점되어 결과를 <mark>실시간으로 확인</mark>하고 약점을 바로잡습니다.</p></div></div>
+            <div><span class="s">STEP 2</span><div><h4>정답 없는 오답 훈련</h4><p>틀린 문제는 정답을 절대 알려주지 않고 <mark>스스로 모두 맞힐 때까지</mark> 반복합니다.</p></div></div>
+            <div><span class="s">STEP 3</span><div><h4>유사 문제 자동 생성</h4><p>오답을 해결해도 끝이 아닙니다. <mark>동일한 유형의 유사 문제</mark>를 다시 풀어 정답률 100%를 달성해야 통과합니다.</p></div></div>
+          </div>
+        </article>
+        <article class="t7">
+          <span class="no">05</span><p class="kicker">취약점 집중 공략</p>
+          <h3>약점 완벽 제거</h3><p class="tag">목표 유형 제시</p>
+          <p><mark>3등급, 2등급, 1등급 목표 유형</mark>을 명확히 구분해 내가 취약한 부분만 집중적으로 훈련합니다. 채점 현황표에서 틀린 문항이 분홍색으로 바로 보여요.</p>
+          <button type="button" class="shot-img" data-img><img src="img/f-grading.jpg" alt="목표 유형별 채점 현황표" width="727" height="906" loading="lazy"></button>
+        </article>
+        <article class="t7 dark">
+          <span class="no">06</span><p class="kicker">단 1초의 낭비도 허용하지 않는</p>
+          <h3>시간 관리</h3><p class="tag">시간 초과 경고</p>
+          <p>문항별 풀이 시간을 정밀하게 측정합니다. <mark>적정 시간 초과 시 경고 표시</mark>로 실전 수능에 꼭 필요한 시간 관리 능력까지 엄격하게 훈련합니다.</p>
+          <button type="button" class="shot-img" data-img style="max-width:300px"><img src="img/f-timer.jpg" alt="문항별 풀이시간 표시" width="381" height="357" loading="lazy"></button>
+        </article>
+        <article class="t7">
+          <span class="no">07</span><p class="kicker">전국 단위 정밀 분석 리포트</p>
+          <h3>초정밀 성적표</h3><p class="tag">학습 현황을 한눈에</p>
+          <p>지금 학습 중인 STAGE, CATCH, 단계를 <mark>실시간으로 확인</mark>합니다.</p>
+          <button type="button" class="shot-img" data-img><img src="img/f-status.jpg" alt="나의 수능 STAGE 학습 현황" width="1000" height="427" loading="lazy"></button>
+          <div class="duo">
+            <div class="grade-pill"><span class="num grad-text">1.4</span><span><b style="color:var(--ink)">초정밀 등급 산출</b><br>1등급이 아닌 1.4등급처럼 소수점 단위로</span></div>
+            <div class="grade-pill"><span class="num grad-text">TOP</span><span><b style="color:var(--ink)">실시간 전국 랭킹</b><br>전국 평균·상위 10%와 비교한 내 위치</span></div>
+          </div>
+          <button type="button" class="shot-img" data-img><img src="img/f-final.jpg" alt="나의 수능 Final 실전모의고사 현황" width="1000" height="472" loading="lazy"></button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band how" id="start">
+    <div class="wrap">
+      <p class="eyebrow">How to start</p>
+      <h2>수능 옵티머스<br>이용 안내</h2>
+      <p class="lead">로그인해서 수능 OPTIMUS 메뉴로 들어가면 바로 시작할 수 있어요. 처음에는 STAGE 1의 CATCH 1 VOCA 1단계부터 시작합니다.</p>
+
+      <div class="player" id="player">
+        <div class="player-head"><strong>영상으로 한 번에 보기</strong><span id="ptime">0:00</span></div>
+        <div class="bars" id="pbars">
+          <button type="button" aria-label="1단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="2단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="3단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="4단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="5단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="6단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="7단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="8단계로 이동"><span><i></i></span></button>
+        </div>
+        <div class="pstage">
+          <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="pscreen">
+            <div class="slide on" data-step="1" data-text="학생 아이디와 비밀번호로 로그인해요."><div class="layer">
+              <img src="img/u-login.png" alt="" width="520" height="390">
+              <span class="spot dim" style="--x:5.8;--y:34.4;--w:59;--h:33;--r:8px"><span class="tap"></span><span class="tip">아이디·비밀번호로 로그인</span></span>
+            </div></div>
+            <div class="slide" data-step="2" data-text="위쪽 메뉴에서 수능 OPTIMUS를 눌러요."><div class="layer">
+              <img src="img/u-nav.png" alt="" width="800" height="600">
+              <span class="spot dim" style="--x:59.4;--y:7.6;--w:17;--h:8.8;--r:6px"><span class="tap"></span><span class="tip end">수능 OPTIMUS</span></span>
+            </div></div>
+            <div class="slide" data-step="3" data-text="처음에는 옵티머스 1부터 시작해요."><div class="layer">
+              <img src="img/u-menu.png" alt="" width="600" height="249">
+              <span class="spot dim" style="--x:3;--y:32;--w:31.5;--h:18.5;--r:6px"><span class="tap"></span><span class="tip start">옵티머스 1</span></span>
+            </div></div>
+            <div class="slide" data-step="4" data-text="STAGE 1의 CATCH 1 VOCA에서 1단계 응시를 눌러 시작해요. 이후에는 진행하던 단계부터 이어서 해요."><div class="layer">
+              <img src="img/u-start.png" alt="" width="680" height="508">
+              <span class="spot dim" style="--x:88.6;--y:45;--w:11;--h:8.2;--r:999px"><span class="tap"></span><span class="tip end">응시</span></span>
+            </div></div>
+            <div class="slide" data-step="5" data-text="틀린 문제가 있으면 오답응시로 스스로 맞힐 때까지 다시 풀어요. 정답은 알려주지 않아요."><div class="layer">
+              <img src="img/u-review.png" alt="" width="1000" height="671">
+              <span class="spot dim" style="--x:80.4;--y:37;--w:17.8;--h:6.8;--r:999px"><span class="tap"></span><span class="tip end">오답응시</span></span>
+            </div></div>
+            <div class="slide" data-step="6" data-text="오답 완료 후 점수와 문항별 정답률, 풀이시간까지 확인할 수 있어요."><div class="layer">
+              <img src="img/u-result.jpg" alt="" width="1000" height="762">
+            </div></div>
+            <div class="slide" data-step="7" data-text="VOCA는 정답률 95% 이상 달성하고 오답까지 완료, 나머지 영역들은 오답 완료 및 오답유사 문제까지 모두 완료해야 다음 단계가 열려요."><div class="layer">
+              <img src="img/u-review.png" alt="" width="1000" height="671">
+              <span class="spot dim" style="--x:47.8;--y:85.6;--w:32.6;--h:4.6;--r:6px"><span class="tip up">다음 단계 활성화 조건</span></span>
+            </div></div>
+            <div class="slide" data-step="8" data-text="STAGE 1~3을 모두 마치면 수능 Final 실전모의고사가 열리고, 지난 단계도 다시 풀며 복습할 수 있어요."><div class="layer">
+              <img src="img/u-final.png" alt="" width="1000" height="642">
+              <span class="spot dim" style="--x:0.6;--y:41;--w:21.6;--h:10.2;--r:8px"><span class="tap"></span><span class="tip start">수능 Final 실전모의고사</span></span>
+            </div></div>
+          </div></div>
+          <button type="button" class="pbig" id="pbig" aria-label="영상 재생"></button>
+        </div>
+        <div class="pcap" aria-live="polite"><span class="n" id="pnum">1</span><div><strong id="ptitle">로그인</strong><span id="pdesc">학생 아이디와 비밀번호로 로그인해요.</span></div></div>
+        <div class="pctl">
+          <button type="button" id="pprev">이전</button>
+          <button type="button" class="primary" id="pplay">재생</button>
+          <button type="button" id="pnext">다음</button>
+        </div>
+      </div>
+
+      <div class="steps">
+        <article class="step" id="s1">
+          <div class="step-head"><span class="n">1</span><div><h3>로그인</h3><p>학생 개개인에게 주어진 아이디로 로그인해요. 로그인 정보는 <span class="key">학원 상담실</span>에 문의하세요.</p></div></div>
+          <div class="frame"><button type="button" class="zoom" data-zoom aria-label="1단계 화면 크게 보기"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="screen">
+            <img src="img/u-login.png" alt="학생 로그인 화면" width="520" height="390" loading="lazy">
+            <span class="spot dim" style="--x:5.8;--y:34.4;--w:59;--h:33;--r:8px"><span class="tip">아이디·비밀번호로 로그인</span></span>
+          </div></div></button></div>
+        </article>
+
+        <article class="step" id="s2">
+          <div class="step-head"><span class="n">2</span><div><h3>수능 OPTIMUS 메뉴 누르기</h3><p>로그인하면 나오는 화면 위쪽 메뉴 맨 끝의 <span class="key">수능 OPTIMUS</span>를 눌러요.</p></div></div>
+          <div class="frame"><button type="button" class="zoom" data-zoom aria-label="2단계 화면 크게 보기"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><div class="screen">
+            <img src="img/u-nav.png" alt="상단 메뉴의 수능 OPTIMUS" width="800" height="600" loading="lazy">
+            <span class="spot dim" style="--x:59.4;--y:7.6;--w:17;--h:8.8;--r:6px"><span class="tip end">수능 OPTIMUS</span></span>
+          </div></div></button></div>
+        </article>
+
+        <article class="step" id="s3">
+          <div class="step-head"><span class="n">3</span><div><h3>옵티머스 레벨 선택하기</h3><p>왼쪽 메뉴에 열려 있는 옵티머스 1을 눌러요.</p></div></div>
+          <div class="frame"><button type="button" class="zoom" data-zoom aria-label="3단계 화면 크게 보기"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>수능 OPTIMUS</span></div><div class="screen">
+            <img src="img/u-menu.png" alt="옵티머스 1, 2, PRO 메뉴" width="600" height="249" loading="lazy">
+            <span class="spot dim" style="--x:3;--y:32;--w:31.5;--h:18.5;--r:6px"><span class="tip start">옵티머스 1</span></span>
+          </div></div></button></div>
+        </article>
+
+        <article class="step" id="s4">
+          <div class="step-head"><span class="n">4</span><div><h3>CATCH 1 VOCA 1단계 응시</h3><p>처음에는 STAGE 1의 CATCH 1 VOCA 1단계부터 시작해요. 파란 <span class="key">응시</span> 버튼이 지금 풀 수 있는 단계예요.</p></div></div>
+          <div class="frame"><button type="button" class="zoom" data-zoom aria-label="4단계 화면 크게 보기"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>수능 OPTIMUS</span></div><div class="screen">
+            <img src="img/u-start.png" alt="CATCH 1 VOCA 단계별 응시 화면" width="680" height="508" loading="lazy">
+            <span class="spot dim" style="--x:88.6;--y:45;--w:11;--h:8.2;--r:999px"><span class="tip end">응시</span></span>
+          </div></div></button></div>
+        </article>
+
+        <article class="step" id="s5">
+          <div class="step-head"><span class="n">5</span><div><h3>오답 수행</h3><p>틀린 문제가 있으면 <span class="key">오답응시</span>로 스스로 맞힐 때까지 다시 풀어요. 정답은 알려주지 않아요. CATCH 2~5에서는 <b>오답유사 문제</b>까지 풀어요.</p></div></div>
+          <div class="frame"><button type="button" class="zoom" data-zoom aria-label="5단계 화면 크게 보기"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>수능 OPTIMUS</span></div><div class="screen">
+            <img src="img/u-review.png" alt="단계별 응시 결과와 오답응시 버튼" width="1000" height="671" loading="lazy">
+            <span class="spot dim" style="--x:80.4;--y:37;--w:17.8;--h:6.8;--r:999px"><span class="tip end">오답응시</span></span>
+          </div></div></button></div>
+        </article>
+
+        <article class="step" id="s6">
+          <div class="step-head"><span class="n">6</span><div><h3>점수·정답률 확인</h3><p>오답 완료 후 점수와 문항별 정답률, 풀이시간까지 확인할 수 있어요.</p></div></div>
+          <div class="frame"><button type="button" class="zoom" data-zoom aria-label="6단계 화면 크게 보기"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>수능 OPTIMUS</span></div><div class="screen">
+            <img src="img/u-result.jpg" alt="채점 결과와 문항별 정답률, 풀이시간 화면" width="1000" height="762" loading="lazy">
+          </div></div></button></div>
+        </article>
+
+        <article class="step" id="s7">
+          <div class="step-head"><span class="n">7</span><div><h3>다음 단계 열기 조건</h3><p>화면 아래 <span class="key">다음 단계 활성화 조건</span>을 채워야 다음 단계 응시 버튼이 열려요.</p></div></div>
+          <div class="frame"><button type="button" class="zoom" data-zoom aria-label="7단계 화면 크게 보기"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>수능 OPTIMUS</span></div><div class="screen">
+            <img src="img/u-review.png" alt="다음 단계 활성화 조건 안내 문구" width="1000" height="671" loading="lazy">
+            <span class="spot dim" style="--x:47.8;--y:85.6;--w:32.6;--h:4.6;--r:6px"><span class="tip up">다음 단계 활성화 조건</span></span>
+          </div></div></button></div>
+          <div class="frame" style="padding-top:0">
+            <div class="alarm" role="note">
+              <strong>다음 단계가 열리는 조건</strong>
+              <p><b>VOCA</b>는 정답률 95% 이상 달성 + 오답 완료, <b>나머지 영역</b>은 오답 완료 + 오답유사 문제까지 모두 완료해야 다음 단계가 열려요. 틀린 문제는 정답을 알려주지 않으니 스스로 맞힐 때까지 도전하세요.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="step" id="s8">
+          <div class="step-head"><span class="n">8</span><div><h3>수능 Final 실전모의고사</h3><p>5단계를 마치면 다음 CATCH로, CATCH 1~5를 마치면 다음 STAGE로 넘어가요. STAGE 1~3을 모두 마치면 <span class="key">수능 Final 실전모의고사</span>가 열리고, 지난 단계도 다시 풀며 복습할 수 있어요.</p></div></div>
+          <div class="frame"><button type="button" class="zoom" data-zoom aria-label="8단계 화면 크게 보기"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>수능 OPTIMUS</span></div><div class="screen">
+            <img src="img/u-final.png" alt="수능 Final 실전모의고사 화면" width="1000" height="642" loading="lazy">
+            <span class="spot dim" style="--x:0.6;--y:41;--w:21.6;--h:10.2;--r:8px"><span class="tip start">수능 Final 실전모의고사</span></span>
+          </div></div></button></div>
+        </article>
+      </div>
+
+      <div class="rules">
+        <div class="rule"><span class="ic">01</span><div><h4>Final을 열면 무한 복습이 시작돼요</h4><p>STAGE 3까지 모두 완료하면 STAGE 1~3의 모든 단계 응시 버튼이 다시 활성화되어 언제든 다시 풀며 복습할 수 있어요.</p></div></div>
+        <div class="rule"><span class="ic">02</span><div><h4>복습은 기록에 영향을 주지 않아요</h4><p>복습 응시는 결과만 확인할 수 있고, 기존 학습 통계에는 반영되지 않아요.</p></div></div>
+        <div class="rule"><span class="ic">03</span><div><h4>레벨은 옵티머스 1 → 옵티머스 2 → 옵티머스 PRO 순으로 진행돼요</h4><p>난이도는 고1부터 고3 고난도 순으로 단계별 난이도가 자동 설정돼요.</p></div></div>
+      </div>
+      <div class="lvtable" style="margin-top:12px">
+        <table>
+          <thead><tr><th>레벨</th><th>난이도</th><th>STAGE</th></tr></thead>
+          <tbody>
+            <tr><td><b>옵티머스 1</b></td><td>중급 <span class="lv-note">(고1~고2)</span></td><td>STAGE 1, 2, 3</td></tr>
+            <tr><td><b>옵티머스 2</b></td><td>상급 <span class="lv-note">(고2 고난도~고3)</span></td><td>STAGE 4, 5, 6</td></tr>
+            <tr><td><b>옵티머스 PRO</b></td><td>최상급 <span class="lv-note">(고3 고난도)</span></td><td>STAGE 7, 8, 9</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="faq">
+    <div class="wrap">
+      <p class="eyebrow">FAQ</p>
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        <details><summary>다음 단계 응시 버튼이 열리지 않아요.</summary><p class="a">VOCA는 정답률 95% 이상을 달성하고 오답까지 완료해야, 나머지 영역은 오답과 오답유사 문제까지 모두 완료해야 다음 단계가 열립니다. 끝내지 않은 오답이 있는지 확인해 주세요.</p></details>
+        <details><summary>틀린 문제의 정답을 알려주나요?</summary><p class="a">아니요. 수능 옵티머스는 학생 스스로 찾아낼 때까지 정답을 알려주지 않습니다. 스스로 모두 맞힐 때까지 반복해 주세요.</p></details>
+        <details><summary>이미 끝낸 단계를 다시 풀 수 있나요?</summary><p class="a">STAGE 3까지 모두 완료하면 STAGE 1~3의 모든 단계를 다시 풀며 복습할 수 있습니다. 복습 결과는 기존 학습 통계에 반영되지 않습니다.</p></details>
+        <details><summary>로그인 아이디와 비밀번호는 어디서 받나요?</summary><p class="a">로그인 정보는 학원 상담실로 문의해 주세요.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="크게 보기">
+  <div id="lb-stage"></div>
+  <button type="button" id="lb-close">닫기</button>
+</div>
+
+<script>
+(function () {
+  // 크게 보기
+  var lb = document.getElementById('lb'), stage = document.getElementById('lb-stage');
+  function openLb(node) { stage.innerHTML = ''; stage.appendChild(node); lb.hidden = false; document.getElementById('lb-close').focus(); }
+  document.querySelectorAll('[data-img]').forEach(function (b) {
+    b.addEventListener('click', function () { var img = b.querySelector('img').cloneNode(); img.removeAttribute('loading'); openLb(img); });
+  });
+  document.querySelectorAll('[data-zoom]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var screen = b.querySelector('.screen').cloneNode(true), img = screen.querySelector('img');
+      var ratio = img.getAttribute('width') / img.getAttribute('height');
+      screen.style.width = Math.min(window.innerWidth - 32, (window.innerHeight - 96) * ratio, 1000) + 'px';
+      img.removeAttribute('loading');
+      openLb(screen);
+    });
+  });
+  function closeLb() { lb.hidden = true; stage.innerHTML = ''; }
+  lb.addEventListener('click', closeLb);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+
+  // CATCH 탭
+  var tabs = document.querySelectorAll('.catch-tabs [role="tab"]');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) { var on = o === t; o.setAttribute('aria-selected', on); document.getElementById(o.getAttribute('aria-controls')).hidden = !on; });
+    });
+  });
+
+  // 숫자 카운트업 (처음 화면에 들어올 때 한 번)
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !reduce) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        cio.unobserve(en.target);
+        var el = en.target, to = +el.getAttribute('data-count'), t0 = performance.now(), D = +el.getAttribute('data-dur') || 1200;
+        var mega = el.closest('.mega');
+        function finish() { el.textContent = to.toLocaleString('ko-KR'); if (mega) mega.classList.add('done'); }
+        (function step(now) {
+          var p = Math.min(1, (now - t0) / D), v = Math.round(to * (1 - Math.pow(1 - p, 3)));
+          el.textContent = v.toLocaleString('ko-KR');
+          if (p < 1) setTimeout(function () { step(performance.now()); }, 30); else finish();
+        })(t0);
+        setTimeout(finish, D + 400);
+      });
+    }, { threshold: .6 });
+    document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+  }
+
+  // 목차: 누르면 고정 메뉴 높이만큼 비켜서 정확히 이동, 현재 위치는 메뉴 안에서만 가로로 따라감
+  var nav = document.querySelector('.nav'), navRow = nav.querySelector('.wrap');
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+  var secs = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  var lock = 0;
+  function mark(i) {
+    links.forEach(function (a, j) { a.classList.toggle('on', i === j); });
+    var a = links[i];
+    navRow.scrollTo({ left: a.offsetLeft - (navRow.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' });
+  }
+  function jump(target, i) {
+    var y = target.getBoundingClientRect().top + window.pageYOffset - nav.offsetHeight - 8;
+    lock = Date.now() + 1200;
+    if (i >= 0) mark(i);
+    window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.getElementById(a.getAttribute('href').slice(1));
+      if (!target) return;
+      e.preventDefault();
+      jump(target, secs.indexOf(target));
+    });
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (Date.now() < lock) return;
+      entries.forEach(function (en) { if (en.isIntersecting) mark(secs.indexOf(en.target)); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+
+  // 따라보기 영상: 장면마다 자막 길이에 맞춰 충분히 보여주고, 표시 등장 → 탭 → 다음 장면
+  (function () {
+    var titles = ['로그인', '수능 OPTIMUS 메뉴', '옵티머스 레벨 선택하기', 'CATCH 1 VOCA 1단계 응시', '오답 수행', '점수·정답률 확인', '다음 단계 열기 조건', '수능 Final 실전모의고사'];
+    var CUE = 600;
+    var slides = Array.prototype.slice.call(document.querySelectorAll('#player .slide'));
+    var scenes = slides.map(function (s) {
+      var text = s.getAttribute('data-text') || '';
+      var hasTap = !!s.querySelector('.tap');
+      // 읽는 시간: 기본 2.4초 + 글자당 0.11초, 최소 4.5초 / 탭 장면은 탭을 보여줄 1.2초 추가
+      var dur = Math.max(4500, 2400 + text.length * 110) + (hasTap ? 1200 : 0);
+      return { el: s, step: +s.getAttribute('data-step') - 1, text: text, dur: dur, tapAt: hasTap ? dur - 1500 : -1 };
+    });
+    var total = scenes.reduce(function (a, s) { return a + s.dur; }, 0);
+    var starts = []; scenes.reduce(function (a, s, i) { starts[i] = a; return a + s.dur; }, 0);
+    var stepRange = titles.map(function (_, k) {
+      var idx = scenes.map(function (s, i) { return s.step === k ? i : -1; }).filter(function (i) { return i >= 0; });
+      var a = starts[idx[0]], b = starts[idx[idx.length - 1]] + scenes[idx[idx.length - 1]].dur;
+      return { first: idx[0], a: a, b: b };
+    });
+    var fills = document.querySelectorAll('#pbars i');
+    var bigBtn = document.getElementById('pbig'), playBtn = document.getElementById('pplay');
+    var desc = document.getElementById('pdesc');
+    var cur = 0, t = 0, playing = false, ended = false, last = 0, tapped = false;
+
+    function fmt(ms) { var s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
+    function render() {
+      var sc = scenes[cur], now = starts[cur] + t;
+      slides.forEach(function (s, i) {
+        s.classList.toggle('on', i === cur);
+        s.classList.toggle('cue', i === cur && (t >= CUE || !playing));
+      });
+      fills.forEach(function (f, k) {
+        var r = stepRange[k];
+        f.style.width = Math.max(0, Math.min(100, (now - r.a) / (r.b - r.a) * 100)) + '%';
+      });
+      document.getElementById('pnum').textContent = sc.step + 1;
+      document.getElementById('ptitle').textContent = titles[sc.step];
+      if (desc.textContent !== sc.text) desc.textContent = sc.text;
+      document.getElementById('ptime').textContent = fmt(now) + ' / ' + fmt(total);
+      bigBtn.hidden = playing;
+      bigBtn.classList.toggle('replay', ended);
+      bigBtn.setAttribute('aria-label', ended ? '처음부터 다시 보기' : '영상 재생');
+      playBtn.textContent = playing ? '일시정지' : ended ? '다시 보기' : '재생';
+    }
+    function go(i) {
+      cur = Math.max(0, Math.min(scenes.length - 1, i)); t = 0; tapped = false; ended = false;
+      slides.forEach(function (s) { s.classList.remove('tapped'); });
+      last = performance.now();
+      render();
+    }
+    function frame(now) {
+      if (!playing) return;
+      t += Math.min(now - last, 1000); last = now;
+      var sc = scenes[cur];
+      if (!tapped && sc.tapAt >= 0 && t >= sc.tapAt) {
+        tapped = true;
+        sc.el.classList.remove('tapped'); void sc.el.offsetWidth; sc.el.classList.add('tapped');
+      }
+      if (t >= sc.dur) {
+        if (cur === scenes.length - 1) { t = sc.dur; playing = false; ended = true; render(); return; }
+        go(cur + 1);
+      }
+      render();
+      setTimeout(tick, 50);
+    }
+    function play() {
+      if (ended) go(0);
+      playing = true; last = performance.now(); render(); setTimeout(tick, 50);
+    }
+    function tick() { frame(performance.now()); }
+    function pause() { playing = false; render(); }
+
+    bigBtn.addEventListener('click', play);
+    playBtn.addEventListener('click', function () { playing ? pause() : play(); });
+    document.querySelector('#player .pscreen').addEventListener('click', function () { if (playing) pause(); });
+    document.getElementById('pprev').addEventListener('click', function () { go(cur - 1); });
+    document.getElementById('pnext').addEventListener('click', function () { go(cur + 1); });
+    document.querySelectorAll('#pbars button').forEach(function (b, k) {
+      b.addEventListener('click', function () { go(stepRange[k].first); });
+    });
+    document.addEventListener('visibilitychange', function () { if (document.hidden && playing) pause(); });
+    render();
+  })();
+
+})();
+</script>
+
+</body>
+</html>

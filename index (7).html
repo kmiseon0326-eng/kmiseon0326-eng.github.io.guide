@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="완공 시작부터 학습현황기록 제출까지, 앱 완공 메뉴 사용 방법을 안내합니다.">
+<meta property="og:title" content="앱 완공 메뉴 사용 안내">
+<meta property="og:description" content="완공 시작부터 학습현황기록 제출까지 6단계로 안내합니다.">
+<meta property="og:type" content="website">
+<title>앱 완공 메뉴 사용 안내</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: one phone-width column; clean app screens in a device frame with web-native hotspots on top */
+:root {
+  --bg: #f6f3fa;
+  --surface: #ffffff;
+  --fg: #221a2e;
+  --muted: #6b6178;
+  --line: #e4dcee;
+  --accent: #7a2fb3;        /* 완공 CLASS 보라 */
+  --accent-soft: #efe4f8;
+  --hl: #f2542d;            /* 화면 위 표시(핫스팟) */
+  --hl-fg: #ffffff;
+  --mark: #ffe066;
+  --mark-fg: #2b2100;
+  --warn: #d6262f;
+  --warn-soft: #fde8e9;
+  --good: #1f8a52;
+  --good-soft: #e3f4ea;
+  --coin: #e8a300;
+  --device: #18131f;
+  --chip: #1d1426;
+  --chip-fg: #ffffff;
+  --scrim: rgba(18, 10, 28, .48);
+  --font-display: "Do Hyeon", "IBM Plex Sans KR", sans-serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17121e; --surface: #221b2c; --fg: #f1ecf7; --muted: #a99db8; --line: #3a3048;
+    --accent: #c08cf0; --accent-soft: #33244a; --hl: #ff6a45; --mark: #ffd84d; --mark-fg: #2b2100;
+    --warn: #ff6b72; --warn-soft: #3d1c20; --good: #5fd18f; --good-soft: #17342a; --coin: #ffc233;
+    --device: #000000;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17121e; --surface: #221b2c; --fg: #f1ecf7; --muted: #a99db8; --line: #3a3048;
+  --accent: #c08cf0; --accent-soft: #33244a; --hl: #ff6a45; --mark: #ffd84d; --mark-fg: #2b2100;
+  --warn: #ff6b72; --warn-soft: #3d1c20; --good: #5fd18f; --good-soft: #17342a; --coin: #ffc233;
+  --device: #000000;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  word-break: keep-all;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.wrap {
+  max-width: 560px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.25; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+/* Header */
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { padding-block: 28px 22px; display: grid; gap: 10px; }
+.crumb { font-size: 13px; color: var(--muted); letter-spacing: .02em; }
+.crumb b { color: var(--accent); font-weight: 700; }
+h1 { font-size: 34px; }
+.lead { color: var(--muted); font-size: 15px; }
+
+/* Sticky section nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+.nav .wrap::-webkit-scrollbar { display: none; }
+.nav a {
+  flex: none; text-decoration: none; color: var(--fg); font-size: 14px; font-weight: 500;
+  padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg);
+}
+.nav a.on { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+
+main .wrap { display: grid; gap: 40px; padding-block: 28px 56px; }
+section { display: grid; gap: 16px; scroll-margin-top: 70px; }
+.eyebrow { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .06em; }
+h2 { font-size: 27px; }
+.sub { color: var(--muted); font-size: 15px; }
+
+/* Number badge shared by the strip, step cards and hotspots */
+.n {
+  display: inline-grid; place-items: center; flex: none;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--hl); color: var(--hl-fg);
+  font: 700 13px/1 var(--font-body); font-variant-numeric: tabular-nums;
+}
+
+/* Daily strip */
+.strip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.strip a {
+  display: grid; gap: 6px; text-decoration: none; color: var(--fg);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px;
+  min-height: 84px; align-content: start;
+}
+.strip .n { width: 24px; height: 24px; font-size: 12px; }
+.strip span:last-child { font-size: 14px; font-weight: 500; line-height: 1.35; }
+.strip li:last-child a { border-color: var(--warn); background: var(--warn-soft); }
+
+/* Video placeholder */
+.video {
+  border: 2px dashed var(--line); border-radius: 14px; background: var(--surface);
+  aspect-ratio: 9 / 10; max-width: 100%; display: grid; place-items: center; text-align: center; padding: 20px;
+}
+.video .play { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; margin: 0 auto 12px; }
+.video .play::after { content: ""; border-left: 20px solid var(--surface); border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 5px; }
+.video strong { display: block; font-size: 17px; }
+.video small { color: var(--muted); font-size: 13px; }
+
+/* Step cards */
+.steps { display: grid; gap: 14px; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; scroll-margin-top: 70px; }
+.step-head { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 16px 16px 14px; }
+.step-head .n { width: 32px; height: 32px; font-size: 15px; }
+.step-head h3 { font-size: 21px; }
+.step-head p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+.key { background: var(--accent-soft); color: var(--accent); padding: 0 6px; border-radius: 5px; font-weight: 700; }
+
+/* Device frame + screen */
+.shot { margin: 0; background: var(--bg); padding: 22px 16px 20px; display: grid; justify-items: center; gap: 12px; }
+.phone {
+  width: min(100%, 290px); padding: 7px; border-radius: 30px; background: var(--device);
+  box-shadow: 0 1px 0 var(--line), 0 14px 34px rgba(40, 14, 70, .18);
+  border: 0; cursor: zoom-in; display: block; font: inherit; color: inherit;
+}
+.phone.wide { width: min(100%, 330px); }
+.screen { position: relative; overflow: hidden; border-radius: 23px; background: #fff; }
+.screen img { width: 100%; height: auto; }
+.shot figcaption { font-size: 13px; color: var(--muted); text-align: center; }
+.shot figcaption .btn { display: inline-block; background: #e7473c; color: #fff; font-weight: 700; padding: 1px 10px; border-radius: 6px; font-size: 12px; margin: 0 2px; }
+
+/* Hotspot: ring around the target, optional scrim around it, number badge, label chip */
+.spot {
+  position: absolute;
+  left: calc(var(--x) * 1%); top: calc(var(--y) * 1%);
+  width: calc(var(--w) * 1%); height: calc(var(--h) * 1%);
+  border-radius: var(--r, 10px);
+  box-shadow: 0 0 0 2.5px var(--hl), 0 0 0 6px color-mix(in srgb, var(--hl) 28%, transparent);
+  pointer-events: none;
+}
+.spot.dim { box-shadow: 0 0 0 2.5px var(--hl), 0 0 0 6px color-mix(in srgb, var(--hl) 28%, transparent), 0 0 0 200vmax var(--scrim); }
+.spot.ghost { box-shadow: 0 0 0 2px var(--chip-fg); border: 0; opacity: .9; }
+.spot::after {
+  content: ""; position: absolute; inset: -2px; border-radius: inherit;
+  border: 2px solid var(--hl); animation: ping 1.8s ease-out infinite;
+}
+.spot.ghost::after { display: none; }
+@keyframes ping { 0% { opacity: .9; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(1.35); } }
+.spot > .n {
+  position: absolute; left: -9px; top: -9px; width: 20px; height: 20px; font-size: 11px;
+  box-shadow: 0 0 0 2px #fff;
+}
+.spot.in > .n { left: 6px; top: 6px; }
+.tip {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  top: calc(100% + 12px);
+  background: var(--chip); color: var(--chip-fg);
+  font: 700 12px/1 var(--font-body); letter-spacing: -.01em;
+  padding: 7px 10px; border-radius: 8px; white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
+}
+.tip::before {
+  content: ""; position: absolute; left: 50%; top: -5px; margin-left: -5px;
+  border: 5px solid transparent; border-top: 0; border-bottom-color: var(--chip);
+}
+.tip.up { top: auto; bottom: calc(100% + 12px); }
+.tip.up::before { top: auto; bottom: -5px; border-bottom: 0; border-top: 5px solid var(--chip); }
+.tip.end { left: auto; right: -4px; transform: none; }
+.tip.end::before { left: auto; right: 16px; margin-left: 0; }
+.tip.soft { background: var(--chip-fg); color: var(--chip); }
+.tip.soft::before { border-bottom-color: var(--chip-fg); }
+
+/* Numbered legend under a multi-hotspot screen */
+.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; width: 100%; }
+.legend li { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; font-size: 15px; }
+.legend .n { width: 22px; height: 22px; font-size: 12px; margin-top: 2px; }
+.legend b { font-weight: 700; }
+
+.alarm {
+  background: var(--warn-soft); border: 2px solid var(--warn); border-radius: 14px; padding: 14px 16px;
+  display: grid; gap: 4px;
+}
+.alarm strong { color: var(--warn); font-size: 18px; font-family: var(--font-display); font-weight: 400; }
+.alarm p { font-size: 15px; }
+
+/* Record guide */
+.fields { display: grid; gap: 10px; }
+.field { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 8px; }
+.field h3 { font-size: 19px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.field h3 .n { width: 24px; height: 24px; font-size: 12px; background: var(--accent); }
+.field h3 small { font-family: var(--font-body); font-size: 12px; color: var(--accent); background: var(--accent-soft); padding: 1px 8px; border-radius: 999px; }
+.field p { font-size: 15px; }
+.ex { display: grid; gap: 6px; }
+.ex div { font-size: 14px; border-radius: 10px; padding: 8px 10px; display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: start; min-width: 0; }
+.ex .ok { background: var(--good-soft); }
+.ex .no { background: var(--warn-soft); }
+.ex b { font-size: 12px; padding: 1px 7px; border-radius: 999px; color: #fff; white-space: nowrap; margin-top: 2px; }
+.ex .ok b { background: var(--good); }
+.ex .no b { background: var(--warn); }
+.quote { background: var(--mark); color: var(--mark-fg); border-radius: 14px; padding: 16px; font-size: 15px; display: grid; gap: 6px; }
+.quote strong { font-family: var(--font-display); font-weight: 400; font-size: 19px; }
+
+/* Folded sections */
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+summary {
+  list-style: none; cursor: pointer; padding: 16px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
+}
+summary::-webkit-details-marker { display: none; }
+summary h3 { font-size: 21px; }
+summary p { color: var(--muted); font-size: 14px; }
+summary::after {
+  content: ""; width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg); margin: 0 6px 4px 0; transition: transform .2s;
+}
+details[open] summary::after { transform: rotate(-135deg); margin-bottom: -4px; }
+.body { padding: 0 16px 18px; display: grid; gap: 14px; }
+.body > p { font-size: 15px; }
+.body .shot { border-radius: 14px; }
+.facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.fact { background: var(--bg); border-radius: 12px; padding: 12px; display: grid; gap: 2px; }
+.fact span { font-size: 13px; color: var(--muted); }
+.fact strong { font-size: 17px; }
+.coin { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--coin); box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--coin) 60%, #fff); vertical-align: -2px; margin-left: 2px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { background: var(--accent); color: var(--surface); font-weight: 500; font-size: 13px; }
+tr:last-child td { border-bottom: 0; }
+td small { color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); }
+.tabs { display: flex; gap: 6px; }
+.tabs button {
+  font: inherit; font-size: 14px; font-weight: 500; padding: 6px 14px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+}
+.tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.pane { display: grid; gap: 12px; }
+
+/* FAQ */
+.faq { display: grid; gap: 8px; }
+.faq details { border-radius: 12px; }
+.faq summary { padding: 14px 16px; font-weight: 500; font-size: 15px; }
+.faq .body p { font-size: 15px; }
+.faq summary::before { content: "Q"; font-family: var(--font-display); color: var(--accent); font-size: 18px; margin-right: 2px; }
+.faq summary { grid-template-columns: auto 1fr auto; }
+.faq .body p::before { content: "A. "; font-weight: 700; color: var(--accent); }
+
+/* 30초 따라보기 플레이어 */
+.player { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 16px 14px; display: grid; gap: 14px; justify-items: center; }
+.player-head { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.player-head strong { font-family: var(--font-display); font-weight: 400; font-size: 19px; }
+.player-head span { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bars { width: min(100%, 300px); display: flex; gap: 4px; }
+.bars button { flex: 1; height: 16px; padding: 6px 0; border: 0; background: none; cursor: pointer; }
+.bars button span { display: block; height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.bars button i { display: block; height: 100%; width: 0; background: var(--hl); }
+.pstage { position: relative; width: min(100%, 260px); }
+.pstage .phone { width: 100%; cursor: default; }
+.pscreen { aspect-ratio: 9 / 16; }
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity .45s ease; background: var(--slide-bg, #f3f4f6); }
+.slide.on { opacity: 1; }
+.layer { position: relative; width: 100%; }
+.layer img { width: 100%; height: auto; display: block; }
+.slide .spot, .slide .banner { opacity: 0; transition: opacity .35s ease; }
+.slide.cue .spot, .slide.cue .banner { opacity: 1; }
+.tap {
+  position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%;
+  background: rgba(255, 255, 255, .85); box-shadow: 0 0 0 2px var(--hl); opacity: 0; pointer-events: none;
+}
+.slide.tapped .tap { animation: tap .7s ease-out 1; }
+@keyframes tap { 0% { opacity: 0; transform: scale(1.6); } 35% { opacity: 1; transform: scale(.8); } 100% { opacity: 0; transform: scale(1.9); } }
+.banner {
+  position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+  background: var(--chip); color: var(--chip-fg); border-radius: 10px; padding: 9px 12px;
+  font: 700 12px/1.3 var(--font-body); white-space: nowrap; box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+}
+.banner .btn { display: inline-block; background: #e7473c; color: #fff; padding: 1px 8px; border-radius: 5px; margin: 0 2px; }
+.pbig {
+  position: absolute; left: 50%; top: 80%; width: 68px; height: 68px; margin: -34px 0 0 -34px;
+  border-radius: 50%; border: 0; cursor: pointer; background: var(--accent);
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 25%, transparent), 0 10px 26px rgba(0, 0, 0, .3);
+  display: grid; place-items: center;
+}
+.pbig::after { content: ""; border-left: 22px solid #fff; border-top: 13px solid transparent; border-bottom: 13px solid transparent; margin-left: 6px; }
+.pbig.replay { top: 50%; }
+.pbig.replay::after { border: 4px solid #fff; border-left-color: transparent; border-radius: 50%; width: 22px; height: 22px; margin: 0; }
+.pcap { width: min(100%, 320px); display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; min-height: 52px; }
+.pcap strong { display: block; font-size: 16px; }
+.pcap span:last-child { font-size: 14px; color: var(--muted); }
+.pctl { display: flex; gap: 8px; }
+.pctl button {
+  font: 500 14px/1 var(--font-body); padding: 9px 16px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+}
+.pctl button.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+
+footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; text-align: center; }
+
+/* Lightbox */
+.lb { position: fixed; inset: 0; z-index: 20; background: rgba(10, 6, 16, .94); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lb .screen { border-radius: 14px; }
+.lb .tip { font-size: 14px; padding: 9px 12px; }
+.lb button { position: absolute; top: calc(12px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); font: inherit; font-size: 15px; background: #fff; color: #111; border: 0; border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+
+@media (max-width: 360px) { .strip { grid-template-columns: repeat(2, 1fr); } h1 { font-size: 30px; } }
+@media (prefers-reduced-motion: reduce) { .spot::after { animation: none; opacity: 0; } summary::after { transition: none; } html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+</style>
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; }</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="crumb">edusys 앱 › <b>완공</b></p>
+    <h1>앱 완공 메뉴 사용 안내</h1>
+    <p class="lead">완공을 시작하고 끝낸 뒤 학습현황을 기록하는 방법이에요. 아래 6단계만 기억하면 됩니다.</p>
+  </div>
+</header>
+
+<nav class="nav" aria-label="목차">
+  <div class="wrap">
+    <a href="#daily" class="on">이용 순서</a>
+    <a href="#record">기록 작성법</a>
+    <a href="#more">등급·통계·랭킹</a>
+    <a href="#faq">자주 묻는 질문</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <section id="daily">
+      <h2>완공 6단계</h2>
+      <ol class="strip">
+        <li><a href="#s1"><span class="n">1</span><span>앱 로그인</span></a></li>
+        <li><a href="#s2"><span class="n">2</span><span>Edusys 아이콘</span></a></li>
+        <li><a href="#s3"><span class="n">3</span><span>완공 메뉴</span></a></li>
+        <li><a href="#s4"><span class="n">4</span><span>▶ 눌러 시작</span></a></li>
+        <li><a href="#s5"><span class="n">5</span><span>■ 눌러 종료</span></a></li>
+        <li><a href="#s6"><span class="n">6</span><span>기록 제출</span></a></li>
+      </ol>
+
+      <div class="player" id="player">
+        <div class="player-head"><strong>30초 영상으로 한 번에 보기</strong><span id="ptime">0:00 / 0:30</span></div>
+        <div class="bars" id="pbars">
+          <button type="button" aria-label="1단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="2단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="3단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="4단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="5단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="6단계로 이동"><span><i></i></span></button>
+        </div>
+        <div class="pstage">
+          <div class="phone"><div class="screen pscreen">
+            <div class="slide on" style="--slide-bg:#2b2a35"><div class="layer">
+              <img src="app/home.png" alt="" width="391" height="586">
+              <span class="spot dim" style="--x:53;--y:43.6;--w:18;--h:15.6;--r:14px"><span class="tap"></span><span class="tip">edusys 앱 열기</span></span>
+            </div></div>
+            <div class="slide" style="--slide-bg:#fffdf0"><div class="layer">
+              <img src="app/test.png" alt="" width="271" height="536">
+              <span class="spot dim" style="--x:64.8;--y:1;--w:12;--h:6;--r:8px"><span class="tap"></span><span class="tip">Edusys 누르기</span></span>
+            </div></div>
+            <div class="slide" style="--slide-bg:#ffffff"><div class="layer">
+              <img src="app/menu.png" alt="" width="270" height="531">
+              <span class="spot dim" style="--x:53.5;--y:47.3;--w:17;--h:10.4;--r:12px"><span class="tap"></span><span class="tip">완공 누르기</span></span>
+            </div></div>
+            <div class="slide" style="--slide-bg:#f3f3f6"><div class="layer">
+              <img src="app/class-ready.png" alt="" width="546" height="756">
+              <span class="spot dim" style="--x:82.8;--y:72;--w:10.5;--h:7.8;--r:50%"><span class="tap"></span><span class="tip up end">눌러서 시작</span></span>
+            </div></div>
+            <div class="slide" style="--slide-bg:#f3f3f6"><div class="layer">
+              <img src="app/class-running.png" alt="" width="472" height="677">
+              <span class="spot dim" style="--x:84.3;--y:71.6;--w:10.2;--h:7.1;--r:50%"><span class="tap"></span><span class="tip up end">다 끝나면 종료</span></span>
+            </div></div>
+            <div class="slide" style="--slide-bg:#f3f3f6"><div class="layer">
+              <img src="app/record-form.png" alt="" width="482" height="852">
+            </div><span class="banner">6개 항목 작성 후 맨 아래 <span class="btn">제출</span></span></div>
+          </div></div>
+          <button type="button" class="pbig" id="pbig" aria-label="영상 재생"></button>
+        </div>
+        <div class="pcap" aria-live="polite"><span class="n" id="pnum">1</span><div><strong id="ptitle">edusys 앱에 로그인</strong><span id="pdesc">폰에서 edusys 앱을 열고 로그인해요.</span></div></div>
+        <div class="pctl">
+          <button type="button" id="pprev">이전</button>
+          <button type="button" class="primary" id="pplay">재생</button>
+          <button type="button" id="pnext">다음</button>
+        </div>
+      </div>
+
+      <div class="steps">
+        <article class="step" id="s1">
+          <div class="step-head"><span class="n">1</span><div><h3>edusys 앱에 로그인</h3><p>폰에서 <span class="key">edusys</span> 앱을 열고 로그인해요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="1단계 화면 크게 보기"><div class="screen">
+              <img src="app/home.png" alt="폰 홈 화면의 edusys 앱 아이콘" width="391" height="586">
+              <span class="spot dim" style="--x:53;--y:43.6;--w:18;--h:15.6;--r:14px"><span class="tip">edusys 앱 열기</span></span>
+            </div></button>
+          </figure>
+        </article>
+
+        <article class="step" id="s2">
+          <div class="step-head"><span class="n">2</span><div><h3>오른쪽 위 Edusys 아이콘 누르기</h3><p>TEST 응시 화면이 나오면 오른쪽 위의 <span class="key">Edusys</span>(학교 모양) 아이콘을 눌러요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="2단계 화면 크게 보기"><div class="screen">
+              <img src="app/test.png" alt="상단 메뉴의 Edusys 아이콘 위치" width="271" height="536">
+              <span class="spot dim" style="--x:64.8;--y:1;--w:12;--h:6;--r:8px"><span class="tip">Edusys 누르기</span></span>
+            </div></button>
+          </figure>
+        </article>
+
+        <article class="step" id="s3">
+          <div class="step-head"><span class="n">3</span><div><h3>완공 메뉴 누르기</h3><p>홈 화면 아이콘 중 <span class="key">완공</span>을 눌러요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="3단계 화면 크게 보기"><div class="screen">
+              <img src="app/menu.png" alt="edusys 홈 화면의 완공 메뉴" width="270" height="531">
+              <span class="spot dim" style="--x:53.5;--y:47.3;--w:17;--h:10.4;--r:12px"><span class="tip">완공 누르기</span></span>
+            </div></button>
+          </figure>
+        </article>
+
+        <article class="step" id="s4">
+          <div class="step-head"><span class="n">4</span><div><h3>▶ 버튼으로 완공 시작</h3><p>공부를 시작할 때 <span class="key">▶</span> 버튼을 누르면 집중 시간이 올라가기 시작해요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="4단계 화면 크게 보기"><div class="screen">
+              <img src="app/class-ready.png" alt="완공 CLASS 화면의 시작 버튼" width="546" height="756">
+              <span class="spot dim" style="--x:82.8;--y:72;--w:10.5;--h:7.8;--r:50%"><span class="tip up end">눌러서 시작</span></span>
+            </div></button>
+          </figure>
+        </article>
+
+        <article class="step" id="s5">
+          <div class="step-head"><span class="n">5</span><div><h3>■ 버튼으로 완공 종료</h3><p>공부가 모두 끝나면 <span class="key">■</span> 버튼을 눌러요. 그러면 학습현황기록 화면으로 넘어가요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="5단계 화면 크게 보기"><div class="screen">
+              <img src="app/class-running.png" alt="일시정지와 종료 버튼" width="472" height="677">
+              <span class="spot dim" style="--x:84.3;--y:71.6;--w:10.2;--h:7.1;--r:50%"><span class="tip up end">다 끝나면 종료</span></span>
+              <span class="spot ghost" style="--x:74.4;--y:71.6;--w:10.2;--h:7.1;--r:50%"><span class="tip soft">잠깐 쉴 때</span></span>
+            </div></button>
+          </figure>
+        </article>
+
+        <div class="alarm" role="note">
+          <strong>귀가하기 전에 반드시 기록을 제출하세요!</strong>
+          <p>기록을 제출해야 그날의 완공이 끝나요.</p>
+        </div>
+
+        <article class="step" id="s6">
+          <div class="step-head"><span class="n">6</span><div><h3>학습현황기록 쓰고 제출</h3><p>6개 항목을 모두 채운 뒤 <span class="key">제출</span>을 눌러요. 항목별 작성법은 <a href="#record">바로 아래</a>에 있어요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="6단계 화면 크게 보기"><div class="screen">
+              <img src="app/record-form.png" alt="학습현황기록 입력 화면" width="482" height="852">
+            </div></button>
+            <figcaption>6개 항목을 다 쓰면 맨 아래 <span class="btn">제출</span> 버튼을 눌러요</figcaption>
+          </figure>
+        </article>
+      </div>
+    </section>
+
+    <section id="record">
+      <p class="eyebrow">6단계 자세히 보기</p>
+      <h2>학습현황기록 이렇게 써요</h2>
+      <p class="sub">별표(*) 항목은 모두 필수예요. 오늘 무엇을 얼마나 했는지 나중에 봐도 알 수 있게 적어주세요.</p>
+
+      <div class="fields">
+        <div class="field">
+          <h3><span class="n">1</span>학습영역 <small>여러 개 선택 가능</small></h3>
+          <p>완공 시간에 공부한 영역을 모두 골라요. 문법, 독해, 듣기, CETA, 재시험, 과제미비, 내신 중에서 고를 수 있어요.</p>
+        </div>
+        <div class="field">
+          <h3><span class="n">2</span>학습교재 <small>여러 개 선택 가능</small></h3>
+          <p>완공 시간에 사용한 교재를 모두 골라요.</p>
+        </div>
+        <div class="field">
+          <h3><span class="n">3</span>학습내용</h3>
+          <p>교재 이름과 쪽수까지 구체적으로 적어요.</p>
+          <div class="ex">
+            <div class="ok"><b>좋아요</b><span>문법완성 2200제 p.20-30, 더시크릿 실전모의고사 2회 문제풀이</span></div>
+            <div class="no"><b>아쉬워요</b><span>문법 공부함</span></div>
+          </div>
+        </div>
+        <div class="field">
+          <h3><span class="n">4</span>자기 평가</h3>
+          <p>"나는 오늘 ___" 문장에 맞는 것을 하나 골라요. 목표한 분량을 <b>일부만</b> 했는지, <b>모두</b> 했는지 선택해요.</p>
+        </div>
+        <div class="field">
+          <h3><span class="n">5</span>자기 평가 세부 내용</h3>
+          <p>왜 그렇게 선택했는지 솔직하고 자세하게 적어요.</p>
+          <div class="ex">
+            <div class="ok"><b>좋아요</b><span>오늘은 집중이 잘 되어서 문제풀이 성적이 좋았다. 모르는 부분은 담임선생님께 물어보고 나니 이해가 잘 되었다.</span></div>
+            <div class="no"><b>아쉬워요</b><span>그냥 했다.</span></div>
+          </div>
+        </div>
+        <div class="field">
+          <h3><span class="n">6</span>나의 완공 점수 <small>1~10점</small></h3>
+          <p>오늘의 학습 태도와 성취도를 생각해서 스스로 점수를 매겨요. 후하게도 박하게도 말고 객관적으로요.</p>
+        </div>
+      </div>
+
+      <div class="quote">
+        <strong>기록은 나를 가장 객관적으로 보여주는 데이터예요</strong>
+        <p>솔직하고 꼼꼼하게 남긴 기록이 모이면 스스로 돌아보고 성장하는 데 큰 도움이 돼요. 귀찮더라도 정성 들여 적어주세요.</p>
+      </div>
+    </section>
+
+    <section id="more">
+      <p class="eyebrow">필요할 때 펼쳐 보세요</p>
+      <h2>등급·통계·랭킹</h2>
+
+      <details id="grade">
+        <summary><div><h3>포인트와 등급</h3><p>공부한 시간만큼 냥이 쌓이고 등급이 올라가요</p></div></summary>
+        <div class="body">
+          <figure class="shot">
+            <button type="button" class="phone wide" data-zoom aria-label="등급 화면 크게 보기"><div class="screen">
+              <img src="app/class-ready.png" alt="완공 화면의 포인트, 등급안내, 누적 시간 위치" width="546" height="756" loading="lazy">
+              <span class="spot" style="--x:68.8;--y:13.2;--w:14.6;--h:8.6;--r:8px"><span class="n">1</span></span>
+              <span class="spot" style="--x:44;--y:22.4;--w:15;--h:3.6;--r:999px"><span class="n">2</span></span>
+              <span class="spot" style="--x:82.6;--y:28.6;--w:14.4;--h:3.8;--r:6px"><span class="n">3</span></span>
+            </div></button>
+            <ol class="legend">
+              <li><span class="n">1</span><span><b>포인트</b> · 1시간 공부하면 10냥<i class="coin" aria-hidden="true"></i>이 쌓여요. 냥은 조선시대 화폐 단위예요.</span></li>
+              <li><span class="n">2</span><span><b>등급안내</b> · 누르면 등급표가 나와요. 등급은 조선시대 계층 이름이에요.</span></li>
+              <li><span class="n">3</span><span><b>완공 누적 시간</b> · 지금까지 완공한 시간이 모두 더해진 기록이에요.</span></li>
+            </ol>
+          </figure>
+          <div class="tbl">
+            <table>
+              <thead><tr><th>등급</th><th>누적 시간</th><th>포인트</th></tr></thead>
+              <tbody>
+                <tr><td>평민 <small>R0</small></td><td>0–11시간</td><td>0–110냥</td></tr>
+                <tr><td>학동 <small>R1</small></td><td>12–23시간</td><td>120–230냥</td></tr>
+                <tr><td>선비 <small>R2</small></td><td>24–35시간</td><td>240–350냥</td></tr>
+                <tr><td>하급관리 <small>R3</small></td><td>36–47시간</td><td>360–470냥</td></tr>
+                <tr><td>참봉 <small>R4</small></td><td>48–59시간</td><td>480–590냥</td></tr>
+                <tr><td>훈도 <small>R5</small></td><td>60–71시간</td><td>600–710냥</td></tr>
+                <tr><td>찰방 <small>R6</small></td><td>72–89시간</td><td>720–890냥</td></tr>
+                <tr><td>현감 <small>R7</small></td><td>90–107시간</td><td>900–1,070냥</td></tr>
+                <tr><td>현령 <small>R8</small></td><td>108–125시간</td><td>1,080–1,250냥</td></tr>
+                <tr><td>군수 <small>R9</small></td><td>126–143시간</td><td>1,260–1,430냥</td></tr>
+                <tr><td>종사관 <small>R10</small></td><td>144–161시간</td><td>1,440–1,610냥</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">R11부터 왕좌까지의 등급은 앱의 등급안내에서 확인하세요.</p>
+        </div>
+      </details>
+
+      <details id="stats">
+        <summary><div><h3>통계</h3><p>내가 언제, 얼마나 공부했는지 보기</p></div></summary>
+        <div class="body">
+          <div class="tabs" role="tablist" aria-label="통계 종류">
+            <button type="button" role="tab" id="t-day" aria-selected="true" aria-controls="p-day">일간</button>
+            <button type="button" role="tab" id="t-month" aria-selected="false" aria-controls="p-month">월간</button>
+            <button type="button" role="tab" id="t-trend" aria-selected="false" aria-controls="p-trend">추이</button>
+          </div>
+          <div class="pane" role="tabpanel" id="p-day" aria-labelledby="t-day">
+            <p>달력에서 색칠된 <b>완공한 날짜</b>를 누르면 그날의 공부 시간과 학습현황기록이 나와요.</p>
+            <figure class="shot">
+              <button type="button" class="phone wide" data-zoom aria-label="일간 통계 화면 크게 보기"><div class="screen">
+                <img src="app/stats-day.png" alt="통계 일간 달력" width="482" height="611" loading="lazy">
+                <span class="spot dim" style="--x:32;--y:48;--w:11.6;--h:8.6;--r:10px"><span class="tip">완공한 날 누르기</span></span>
+              </div></button>
+            </figure>
+            <figure class="shot">
+              <button type="button" class="phone wide" data-zoom aria-label="날짜별 학습현황 크게 보기"><div class="screen">
+                <img src="app/stats-day-detail.png" alt="선택한 날짜의 학습현황" width="472" height="526" loading="lazy">
+              </div></button>
+              <figcaption>누른 날짜의 시작·종료 시간과 제출한 기록</figcaption>
+            </figure>
+          </div>
+          <div class="pane" role="tabpanel" id="p-month" aria-labelledby="t-month" hidden>
+            <p><b>월</b>을 누르면 그 달에 완공한 모든 날의 공부 시간과 완공 점수를 그래프로 볼 수 있어요.</p>
+            <figure class="shot">
+              <button type="button" class="phone wide" data-zoom aria-label="월간 통계 화면 크게 보기"><div class="screen">
+                <img src="app/stats-month.png" alt="통계 월간 달력" width="472" height="372" loading="lazy">
+                <span class="spot dim" style="--x:28.4;--y:59.2;--w:20.6;--h:12.8;--r:10px"><span class="tip">월 누르기</span></span>
+              </div></button>
+            </figure>
+            <figure class="shot">
+              <button type="button" class="phone wide" data-zoom aria-label="월간 그래프 크게 보기"><div class="screen">
+                <img src="app/stats-month-chart.png" alt="월간 공부시간과 완공 점수 그래프" width="462" height="701" loading="lazy">
+              </div></button>
+              <figcaption>날짜별 공부 시간과 완공 점수 그래프</figcaption>
+            </figure>
+          </div>
+          <div class="pane" role="tabpanel" id="p-trend" aria-labelledby="t-trend" hidden>
+            <p>1년 동안 가장 많이·적게 공부한 날과 달을 한눈에 볼 수 있어요.</p>
+            <figure class="shot">
+              <button type="button" class="phone wide" data-zoom aria-label="추이 화면 크게 보기"><div class="screen">
+                <img src="app/stats-trend.png" alt="일간 추이와 월간 추이" width="471" height="821" loading="lazy">
+                <span class="spot" style="--x:13.4;--y:25.8;--w:37;--h:5.8;--r:6px"><span class="n">1</span></span>
+                <span class="spot" style="--x:13.4;--y:60.8;--w:27.6;--h:6;--r:6px"><span class="n">2</span></span>
+              </div></button>
+              <ol class="legend">
+                <li><span class="n">1</span><span><b>일간 추이</b> · 가장 많이 공부한 날과 가장 적게 공부한 날</span></li>
+                <li><span class="n">2</span><span><b>월간 추이</b> · 가장 많이 공부한 달과 가장 적게 공부한 달</span></li>
+              </ol>
+            </figure>
+          </div>
+        </div>
+      </details>
+
+      <details id="ranking">
+        <summary><div><h3>랭킹</h3><p>같은 학년 친구들과 공부 시간 비교하기</p></div></summary>
+        <div class="body">
+          <p>주간·월간으로 같은 학년 학생들과 공부 시간을 비교해요. 비교 기준은 전국, 학군지, 나의 학교예요.</p>
+          <figure class="shot">
+            <button type="button" class="phone wide" data-zoom aria-label="개인 랭킹 화면 크게 보기"><div class="screen">
+              <img src="app/rank-personal.png" alt="개인 랭킹 화면" width="482" height="657" loading="lazy">
+              <span class="spot in" style="--x:3.4;--y:32;--w:92.6;--h:29.6;--r:10px"><span class="n">1</span></span>
+              <span class="spot in" style="--x:5.8;--y:78.4;--w:87.4;--h:10.4;--r:4px"><span class="n">2</span></span>
+            </div></button>
+            <ol class="legend">
+              <li><span class="n">1</span><span><b>개인 TOP 5</b> · 이번 주 가장 오래 공부한 학생들</span></li>
+              <li><span class="n">2</span><span><b>나의 랭킹</b> · 전국, 학군지, 나의 학교 안에서 내 위치(%)</span></li>
+            </ol>
+          </figure>
+          <figure class="shot">
+            <button type="button" class="phone wide" data-zoom aria-label="학교 랭킹 화면 크게 보기"><div class="screen">
+              <img src="app/rank-school.png" alt="학교 랭킹 화면" width="470" height="647" loading="lazy">
+              <span class="spot" style="--x:30.4;--y:40.2;--w:37.4;--h:5.2;--r:6px"><span class="n">1</span></span>
+              <span class="spot in" style="--x:4.2;--y:72.2;--w:89.6;--h:20.6;--r:4px"><span class="n">2</span></span>
+            </div></button>
+            <ol class="legend">
+              <li><span class="n">1</span><span><b>학년 선택</b> · 학년별 학교 TOP 5를 볼 수 있어요</span></li>
+              <li><span class="n">2</span><span><b>나의 학교 랭킹</b> · 우리 학교 학년별 공부 시간과 순위(%)</span></li>
+            </ol>
+          </figure>
+        </div>
+      </details>
+    </section>
+
+    <section id="faq">
+      <p class="eyebrow">헷갈릴 때</p>
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        <details><summary>학습현황기록을 제출하지 않고 귀가하면 어떻게 되나요?</summary><div class="body"><p>학습현황기록을 제출하지 않으면 당일 총 공부시간이 집계되지 않습니다. 귀가 전 잊지 말고 꼭 제출해 주세요!</p></div></details>
+        <details><summary>제출한 학습기록을 수정할 수 있나요?</summary><div class="body"><p>제출 완료된 기록은 직접 수정할 수 없습니다. 수정을 원하실 경우 담임선생님께 문의해 주시기 바랍니다.</p></div></details>
+        <details><summary>하루에 여러 번 '완공' 메뉴를 사용할 수 있나요?</summary><div class="body"><p>완공 메뉴는 학원에서 지정한 날에만 이용 가능하며, 하루에 여러 번 사용할 수 없습니다.</p></div></details>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer><div class="wrap"><p>궁금한 점은 담임선생님께 물어보세요.</p></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="화면 크게 보기">
+  <div id="lb-stage"></div>
+  <button type="button" id="lb-close">닫기</button>
+</div>
+
+<script>
+(function () {
+  // 화면 크게 보기: 표시까지 그대로 복사해서 확대
+  var lb = document.getElementById('lb'), stage = document.getElementById('lb-stage');
+  document.querySelectorAll('[data-zoom]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var screen = b.querySelector('.screen').cloneNode(true);
+      var img = screen.querySelector('img');
+      var ratio = img.getAttribute('width') / img.getAttribute('height');
+      var w = Math.min(window.innerWidth - 32, (window.innerHeight - 96) * ratio, 520);
+      screen.style.width = w + 'px';
+      stage.innerHTML = ''; stage.appendChild(screen);
+      lb.hidden = false; document.getElementById('lb-close').focus();
+    });
+  });
+  function closeLb() { lb.hidden = true; stage.innerHTML = ''; }
+  lb.addEventListener('click', closeLb);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+
+  // 30초 따라보기: 단계마다 5초, 표시 등장 → 탭 → 다음 화면
+  (function () {
+    var STEP = 5000, CUE = 700, TAP = 2600;
+    var caps = [
+      ['edusys 앱에 로그인', '폰에서 edusys 앱을 열고 로그인해요.'],
+      ['Edusys 아이콘 누르기', '오른쪽 위 학교 모양 아이콘을 눌러요.'],
+      ['완공 메뉴 누르기', '홈 화면에서 완공을 눌러요.'],
+      ['▶ 버튼으로 시작', '공부를 시작할 때 눌러요.'],
+      ['■ 버튼으로 종료', '공부가 모두 끝나면 눌러요.'],
+      ['학습현황기록 제출', '귀가 전에 꼭 작성하고 제출해요.']
+    ];
+    var slides = document.querySelectorAll('#player .slide');
+    var fills = document.querySelectorAll('#pbars i');
+    var bigBtn = document.getElementById('pbig'), playBtn = document.getElementById('pplay');
+    var idx = 0, t = 0, playing = false, ended = false, last = 0, tapped = false;
+
+    function fmt(ms) { var s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
+    function render() {
+      slides.forEach(function (s, i) {
+        s.classList.toggle('on', i === idx);
+        s.classList.toggle('cue', i === idx && (t >= CUE || !playing));
+      });
+      fills.forEach(function (f, i) { f.style.width = (i < idx ? 100 : i > idx ? 0 : Math.min(100, t / STEP * 100)) + '%'; });
+      document.getElementById('pnum').textContent = idx + 1;
+      document.getElementById('ptitle').textContent = caps[idx][0];
+      document.getElementById('pdesc').textContent = caps[idx][1];
+      document.getElementById('ptime').textContent = fmt(idx * STEP + t) + ' / 0:30';
+      bigBtn.hidden = playing;
+      bigBtn.classList.toggle('replay', ended);
+      bigBtn.setAttribute('aria-label', ended ? '처음부터 다시 보기' : '영상 재생');
+      playBtn.textContent = playing ? '일시정지' : ended ? '다시 보기' : '재생';
+    }
+    function go(i) {
+      idx = Math.max(0, Math.min(5, i)); t = 0; tapped = false; ended = false;
+      slides.forEach(function (s) { s.classList.remove('tapped'); });
+      render();
+    }
+    function frame(now) {
+      if (!playing) return;
+      t += now - last; last = now;
+      if (!tapped && t >= TAP) {
+        tapped = true;
+        var s = slides[idx]; s.classList.remove('tapped'); void s.offsetWidth; s.classList.add('tapped');
+      }
+      if (t >= STEP) {
+        if (idx === 5) { t = STEP; playing = false; ended = true; render(); return; }
+        go(idx + 1);
+      }
+      render();
+      requestAnimationFrame(frame);
+    }
+    function play() {
+      if (ended) go(0);
+      playing = true; last = performance.now(); render(); requestAnimationFrame(frame);
+    }
+    function pause() { playing = false; render(); }
+    function toggle() { playing ? pause() : play(); }
+
+    bigBtn.addEventListener('click', play);
+    playBtn.addEventListener('click', toggle);
+    document.getElementById('pprev').addEventListener('click', function () { go(idx - 1); if (playing) last = performance.now(); });
+    document.getElementById('pnext').addEventListener('click', function () { go(idx + 1); if (playing) last = performance.now(); });
+    document.querySelectorAll('#pbars button').forEach(function (b, i) {
+      b.addEventListener('click', function () { go(i); if (playing) last = performance.now(); });
+    });
+    document.addEventListener('visibilitychange', function () { if (document.hidden && playing) pause(); });
+    render();
+  })();
+
+  // 통계 탭
+  var tabs = document.querySelectorAll('[role="tab"]');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) {
+        var on = o === t;
+        o.setAttribute('aria-selected', on);
+        document.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
+
+  // 목차 링크로 접힌 섹션 열기
+  function openHash() {
+    var el = location.hash && document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  }
+  window.addEventListener('hashchange', openHash); openHash();
+
+  // 현재 위치 표시
+  var links = document.querySelectorAll('.nav a');
+  var secs = Array.prototype.map.call(links, function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var i = secs.indexOf(en.target);
+        links.forEach(function (a, j) { a.classList.toggle('on', i === j); });
+        links[i].scrollIntoView({ block: 'nearest', inline: 'center' });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>

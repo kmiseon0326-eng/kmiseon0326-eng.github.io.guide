@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="학교 시험이 끝난 뒤 채점 결과를 입력하고 성적 분석과 학교 기출 분석을 받아보는 앱 내신분석 메뉴 사용 방법을 안내합니다.">
+<meta property="og:title" content="앱 내신분석 메뉴 사용 안내">
+<meta property="og:description" content="채점 결과 제출부터 분석 리포트 확인까지 6단계로 안내합니다.">
+<meta property="og:type" content="website">
+<title>앱 내신분석 메뉴 사용 안내</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: one phone-width column; clean app screens in a device frame with web-native hotspots on top */
+:root {
+  --bg: #f6f3fa;
+  --surface: #ffffff;
+  --fg: #221a2e;
+  --muted: #6b6178;
+  --line: #e4dcee;
+  --accent: #7a2fb3;        /* 완공 CLASS 보라 */
+  --accent-soft: #efe4f8;
+  --hl: #f2542d;            /* 화면 위 표시(핫스팟) */
+  --hl-fg: #ffffff;
+  --mark: #ffe066;
+  --mark-fg: #2b2100;
+  --warn: #d6262f;
+  --warn-soft: #fde8e9;
+  --good: #1f8a52;
+  --good-soft: #e3f4ea;
+  --coin: #e8a300;
+  --device: #18131f;
+  --chip: #1d1426;
+  --chip-fg: #ffffff;
+  --scrim: rgba(18, 10, 28, .48);
+  --font-display: "Do Hyeon", "IBM Plex Sans KR", sans-serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17121e; --surface: #221b2c; --fg: #f1ecf7; --muted: #a99db8; --line: #3a3048;
+    --accent: #c08cf0; --accent-soft: #33244a; --hl: #ff6a45; --mark: #ffd84d; --mark-fg: #2b2100;
+    --warn: #ff6b72; --warn-soft: #3d1c20; --good: #5fd18f; --good-soft: #17342a; --coin: #ffc233;
+    --device: #000000;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17121e; --surface: #221b2c; --fg: #f1ecf7; --muted: #a99db8; --line: #3a3048;
+  --accent: #c08cf0; --accent-soft: #33244a; --hl: #ff6a45; --mark: #ffd84d; --mark-fg: #2b2100;
+  --warn: #ff6b72; --warn-soft: #3d1c20; --good: #5fd18f; --good-soft: #17342a; --coin: #ffc233;
+  --device: #000000;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  word-break: keep-all;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.wrap {
+  max-width: 560px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.25; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+/* Header */
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { padding-block: 28px 22px; display: grid; gap: 10px; }
+.crumb { font-size: 13px; color: var(--muted); letter-spacing: .02em; }
+.crumb b { color: var(--accent); font-weight: 700; }
+h1 { font-size: 34px; }
+.lead { color: var(--muted); font-size: 15px; }
+
+/* Sticky section nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+.nav .wrap::-webkit-scrollbar { display: none; }
+.nav a {
+  flex: none; text-decoration: none; color: var(--fg); font-size: 14px; font-weight: 500;
+  padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg);
+}
+.nav a.on { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+
+main .wrap { display: grid; gap: 40px; padding-block: 28px 56px; }
+section { display: grid; gap: 16px; scroll-margin-top: 70px; }
+.eyebrow { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .06em; }
+h2 { font-size: 27px; }
+.sub { color: var(--muted); font-size: 15px; }
+
+/* Number badge shared by the strip, step cards and hotspots */
+.n {
+  display: inline-grid; place-items: center; flex: none;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--hl); color: var(--hl-fg);
+  font: 700 13px/1 var(--font-body); font-variant-numeric: tabular-nums;
+}
+
+/* Daily strip */
+.strip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.strip a {
+  display: grid; gap: 6px; text-decoration: none; color: var(--fg);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px;
+  min-height: 84px; align-content: start;
+}
+.strip .n { width: 24px; height: 24px; font-size: 12px; }
+.strip span:last-child { font-size: 14px; font-weight: 500; line-height: 1.35; }
+.strip li:last-child a { border-color: var(--warn); background: var(--warn-soft); }
+
+/* Video placeholder */
+.video {
+  border: 2px dashed var(--line); border-radius: 14px; background: var(--surface);
+  aspect-ratio: 9 / 10; max-width: 100%; display: grid; place-items: center; text-align: center; padding: 20px;
+}
+.video .play { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; margin: 0 auto 12px; }
+.video .play::after { content: ""; border-left: 20px solid var(--surface); border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 5px; }
+.video strong { display: block; font-size: 17px; }
+.video small { color: var(--muted); font-size: 13px; }
+
+/* Step cards */
+.steps { display: grid; gap: 14px; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; scroll-margin-top: 70px; }
+.step-head { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 16px 16px 14px; }
+.step-head .n { width: 32px; height: 32px; font-size: 15px; }
+.step-head h3 { font-size: 21px; }
+.step-head p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+.key { background: var(--accent-soft); color: var(--accent); padding: 0 6px; border-radius: 5px; font-weight: 700; }
+
+/* Device frame + screen */
+.shot { margin: 0; background: var(--bg); padding: 22px 16px 20px; display: grid; justify-items: center; gap: 12px; }
+.phone {
+  width: min(100%, 290px); padding: 7px; border-radius: 30px; background: var(--device);
+  box-shadow: 0 1px 0 var(--line), 0 14px 34px rgba(40, 14, 70, .18);
+  border: 0; cursor: zoom-in; display: block; font: inherit; color: inherit;
+}
+.phone.wide { width: min(100%, 330px); }
+.screen { position: relative; overflow: hidden; border-radius: 23px; background: #fff; }
+.screen img { width: 100%; height: auto; }
+.shot figcaption { font-size: 13px; color: var(--muted); text-align: center; }
+.shot figcaption .btn { display: inline-block; background: #e7473c; color: #fff; font-weight: 700; padding: 1px 10px; border-radius: 6px; font-size: 12px; margin: 0 2px; }
+
+/* Hotspot: ring around the target, optional scrim around it, number badge, label chip */
+.spot {
+  position: absolute;
+  left: calc(var(--x) * 1%); top: calc(var(--y) * 1%);
+  width: calc(var(--w) * 1%); height: calc(var(--h) * 1%);
+  border-radius: var(--r, 10px);
+  box-shadow: 0 0 0 2.5px var(--hl), 0 0 0 6px color-mix(in srgb, var(--hl) 28%, transparent);
+  pointer-events: none;
+}
+.spot.dim { box-shadow: 0 0 0 2.5px var(--hl), 0 0 0 6px color-mix(in srgb, var(--hl) 28%, transparent), 0 0 0 200vmax var(--scrim); }
+.spot.ghost { box-shadow: 0 0 0 2px var(--chip-fg); border: 0; opacity: .9; }
+.spot::after {
+  content: ""; position: absolute; inset: -2px; border-radius: inherit;
+  border: 2px solid var(--hl); animation: ping 1.8s ease-out infinite;
+}
+.spot.ghost::after { display: none; }
+@keyframes ping { 0% { opacity: .9; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(1.35); } }
+.spot > .n {
+  position: absolute; left: -9px; top: -9px; width: 20px; height: 20px; font-size: 11px;
+  box-shadow: 0 0 0 2px #fff;
+}
+.spot.in > .n { left: 6px; top: 6px; }
+.tip {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  top: calc(100% + 12px);
+  background: var(--chip); color: var(--chip-fg);
+  font: 700 12px/1 var(--font-body); letter-spacing: -.01em;
+  padding: 7px 10px; border-radius: 8px; white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
+}
+.tip::before {
+  content: ""; position: absolute; left: 50%; top: -5px; margin-left: -5px;
+  border: 5px solid transparent; border-top: 0; border-bottom-color: var(--chip);
+}
+.tip.up { top: auto; bottom: calc(100% + 12px); }
+.tip.up::before { top: auto; bottom: -5px; border-bottom: 0; border-top: 5px solid var(--chip); }
+.tip.end { left: auto; right: -4px; transform: none; }
+.tip.end::before { left: auto; right: 16px; margin-left: 0; }
+.tip.soft { background: var(--chip-fg); color: var(--chip); }
+.tip.soft::before { border-bottom-color: var(--chip-fg); }
+
+/* Numbered legend under a multi-hotspot screen */
+.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; width: 100%; }
+.legend li { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; font-size: 15px; }
+.legend .n { width: 22px; height: 22px; font-size: 12px; margin-top: 2px; }
+.legend b { font-weight: 700; }
+
+.alarm {
+  background: var(--warn-soft); border: 2px solid var(--warn); border-radius: 14px; padding: 14px 16px;
+  display: grid; gap: 4px;
+}
+.alarm strong { color: var(--warn); font-size: 18px; font-family: var(--font-display); font-weight: 400; }
+.alarm p { font-size: 15px; }
+
+/* Record guide */
+.fields { display: grid; gap: 10px; }
+.field { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 8px; }
+.field h3 { font-size: 19px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.field h3 .n { width: 24px; height: 24px; font-size: 12px; background: var(--accent); }
+.field h3 small { font-family: var(--font-body); font-size: 12px; color: var(--accent); background: var(--accent-soft); padding: 1px 8px; border-radius: 999px; }
+.field p { font-size: 15px; }
+.ex { display: grid; gap: 6px; }
+.ex div { font-size: 14px; border-radius: 10px; padding: 8px 10px; display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: start; min-width: 0; }
+.ex .ok { background: var(--good-soft); }
+.ex .no { background: var(--warn-soft); }
+.ex b { font-size: 12px; padding: 1px 7px; border-radius: 999px; color: #fff; white-space: nowrap; margin-top: 2px; }
+.ex .ok b { background: var(--good); }
+.ex .no b { background: var(--warn); }
+.quote { background: var(--mark); color: var(--mark-fg); border-radius: 14px; padding: 16px; font-size: 15px; display: grid; gap: 6px; }
+.quote strong { font-family: var(--font-display); font-weight: 400; font-size: 19px; }
+
+/* Folded sections */
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+summary {
+  list-style: none; cursor: pointer; padding: 16px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
+}
+summary::-webkit-details-marker { display: none; }
+summary h3 { font-size: 21px; }
+summary p { color: var(--muted); font-size: 14px; }
+summary::after {
+  content: ""; width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg); margin: 0 6px 4px 0; transition: transform .2s;
+}
+details[open] summary::after { transform: rotate(-135deg); margin-bottom: -4px; }
+.body { padding: 0 16px 18px; display: grid; gap: 14px; }
+.body > p { font-size: 15px; }
+.body .shot { border-radius: 14px; }
+.facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.fact { background: var(--bg); border-radius: 12px; padding: 12px; display: grid; gap: 2px; }
+.fact span { font-size: 13px; color: var(--muted); }
+.fact strong { font-size: 17px; }
+.coin { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--coin); box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--coin) 60%, #fff); vertical-align: -2px; margin-left: 2px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { background: var(--accent); color: var(--surface); font-weight: 500; font-size: 13px; }
+tr:last-child td { border-bottom: 0; }
+td small { color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); }
+.tabs { display: flex; gap: 6px; }
+.tabs button {
+  font: inherit; font-size: 14px; font-weight: 500; padding: 6px 14px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+}
+.tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.pane { display: grid; gap: 12px; }
+
+/* FAQ */
+.faq { display: grid; gap: 8px; }
+.faq details { border-radius: 12px; }
+.faq summary { padding: 14px 16px; font-weight: 500; font-size: 15px; }
+.faq .body p { font-size: 15px; }
+.faq summary::before { content: "Q"; font-family: var(--font-display); color: var(--accent); font-size: 18px; margin-right: 2px; }
+.faq summary { grid-template-columns: auto 1fr auto; }
+.faq .body p::before { content: "A. "; font-weight: 700; color: var(--accent); }
+
+/* 30초 따라보기 플레이어 */
+.player { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 16px 14px; display: grid; gap: 14px; justify-items: center; }
+.player-head { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.player-head strong { font-family: var(--font-display); font-weight: 400; font-size: 19px; }
+.player-head span { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bars { width: min(100%, 300px); display: flex; gap: 4px; }
+.bars button { flex: 1; height: 16px; padding: 6px 0; border: 0; background: none; cursor: pointer; }
+.bars button span { display: block; height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
+.bars button i { display: block; height: 100%; width: 0; background: var(--hl); }
+.pstage { position: relative; width: min(100%, 260px); }
+.pstage .phone { width: 100%; cursor: default; }
+.pscreen { aspect-ratio: 9 / 16; }
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity .45s ease; background: var(--slide-bg, #f3f4f6); }
+.slide.on { opacity: 1; }
+.layer { position: relative; width: 100%; }
+.layer img { width: 100%; height: auto; display: block; }
+.slide .spot, .slide .banner { opacity: 0; transition: opacity .35s ease; }
+.slide.cue .spot, .slide.cue .banner { opacity: 1; }
+.tap {
+  position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%;
+  background: rgba(255, 255, 255, .85); box-shadow: 0 0 0 2px var(--hl); opacity: 0; pointer-events: none;
+}
+.slide.tapped .tap { animation: tap .7s ease-out 1; }
+@keyframes tap { 0% { opacity: 0; transform: scale(1.6); } 35% { opacity: 1; transform: scale(.8); } 100% { opacity: 0; transform: scale(1.9); } }
+.banner {
+  position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+  background: var(--chip); color: var(--chip-fg); border-radius: 10px; padding: 9px 12px;
+  font: 700 12px/1.3 var(--font-body); white-space: nowrap; box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+}
+.banner .btn { display: inline-block; background: #e7473c; color: #fff; padding: 1px 8px; border-radius: 5px; margin: 0 2px; }
+.pbig {
+  position: absolute; left: 50%; top: 80%; width: 68px; height: 68px; margin: -34px 0 0 -34px;
+  border-radius: 50%; border: 0; cursor: pointer; background: var(--accent);
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 25%, transparent), 0 10px 26px rgba(0, 0, 0, .3);
+  display: grid; place-items: center;
+}
+.pbig::after { content: ""; border-left: 22px solid #fff; border-top: 13px solid transparent; border-bottom: 13px solid transparent; margin-left: 6px; }
+.pbig.replay { top: 50%; }
+.pbig.replay::after { border: 4px solid #fff; border-left-color: transparent; border-radius: 50%; width: 22px; height: 22px; margin: 0; }
+.pcap { width: min(100%, 320px); display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; min-height: 52px; }
+.pcap strong { display: block; font-size: 16px; }
+.pcap span:last-child { font-size: 14px; color: var(--muted); }
+.pctl { display: flex; gap: 8px; }
+.pctl button {
+  font: 500 14px/1 var(--font-body); padding: 9px 16px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+}
+.pctl button.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+
+footer .wrap { padding-block: 0 40px; color: var(--muted); font-size: 13px; text-align: center; }
+
+/* Lightbox */
+.lb { position: fixed; inset: 0; z-index: 20; background: rgba(10, 6, 16, .94); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.lb .screen { border-radius: 14px; }
+.lb .tip { font-size: 14px; padding: 9px 12px; }
+.lb button { position: absolute; top: calc(12px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); font: inherit; font-size: 15px; background: #fff; color: #111; border: 0; border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+
+@media (max-width: 360px) { .strip { grid-template-columns: repeat(2, 1fr); } h1 { font-size: 30px; } }
+@media (prefers-reduced-motion: reduce) { .spot::after { animation: none; opacity: 0; } summary::after { transition: none; } html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+
+/* 공통 보조 */
+.spot.nr > .n { left: auto; right: -9px; }
+.tip.start { left: -4px; transform: none; }
+.tip.start::before { left: 16px; margin-left: 0; }
+.chip { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 5px; white-space: nowrap; }
+.chip.done { background: #1b6e3d; color: #fff; }
+.chip.todo { background: #45b06c; color: #fff; }
+table.btns td { white-space: normal; vertical-align: top; }
+table.btns td:first-child { white-space: nowrap; }
+.swatches { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); }
+.swatches li { display: flex; align-items: center; gap: 6px; }
+.swatches i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+.fact strong { font-size: 15px; line-height: 1.4; }
+
+/* 여러 화면을 옆으로 넘겨 보는 흐름 */
+.flow { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 16px; background: var(--bg); scrollbar-width: none; }
+.flow::-webkit-scrollbar { display: none; }
+.flow .shot { flex: 0 0 min(78%, 260px); scroll-snap-align: center; padding-inline: 0; background: none; }
+.flow figcaption { font-weight: 500; color: var(--fg); }
+.flow-hint { background: var(--bg); color: var(--muted); font-size: 12px; text-align: center; padding: 0 16px 14px; }
+
+/* 장면 자막: 영상 아래에서 읽기 쉽게 */
+.pcap { width: min(100%, 340px); min-height: 100px; align-content: start; }
+.pcap #pdesc { display: block; font-size: 15px; line-height: 1.5; color: var(--fg); margin-top: 2px; }
+.pcap #ptitle { font-size: 14px; color: var(--accent); }
+</style>
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); } body { margin: 0; }</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="crumb">edusys 앱 › <b>내신분석</b></p>
+    <h1>앱 내신분석 메뉴 사용 안내</h1>
+    <p class="lead">학교 시험이 끝나면 채점 결과를 입력하고, 나의 성적 분석과 우리 학교 기출 분석을 받아보는 메뉴예요.</p>
+  </div>
+</header>
+
+<nav class="nav" aria-label="목차">
+  <div class="wrap">
+    <a href="#daily" class="on">이용 순서</a>
+    <a href="#howto">채점 입력법</a>
+    <a href="#more">분석 리포트</a>
+    <a href="#faq">자주 묻는 질문</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <section id="daily">
+      <h2>내신분석 6단계</h2>
+      <ol class="strip">
+        <li><a href="#s1"><span class="n">1</span><span>내신분석 메뉴</span></a></li>
+        <li><a href="#s2"><span class="n">2</span><span>채점 결과 제출</span></a></li>
+        <li><a href="#s3"><span class="n">3</span><span>시험 고르기</span></a></li>
+        <li><a href="#s4"><span class="n">4</span><span>O·✕ 표시 후 제출</span></a></li>
+        <li><a href="#s5"><span class="n">5</span><span>분석 리포트</span></a></li>
+        <li><a href="#s6"><span class="n">6</span><span>분석 보기</span></a></li>
+      </ol>
+
+      <div class="player" id="player">
+        <div class="player-head"><strong>영상으로 한 번에 보기</strong><span id="ptime">0:00</span></div>
+        <div class="bars" id="pbars">
+          <button type="button" aria-label="1단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="2단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="3단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="4단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="5단계로 이동"><span><i></i></span></button>
+          <button type="button" aria-label="6단계로 이동"><span><i></i></span></button>
+        </div>
+        <div class="pstage">
+          <div class="phone"><div class="screen pscreen">
+            <div class="slide on" data-step="1" data-text="edusys 앱에 로그인한 뒤 홈 화면에서 내신분석을 눌러요." style="--slide-bg:#ffffff"><div class="layer">
+              <img src="app/menu.png" alt="" width="472" height="552">
+              <span class="spot dim" style="--x:32.8;--y:68.8;--w:12.7;--h:12.3;--r:12px"><span class="tap"></span><span class="tip">내신분석 누르기</span></span>
+            </div></div>
+            <div class="slide" data-step="2" data-text="내신분석 첫 화면에서 맨 위의 채점 결과 제출을 눌러요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/main.png" alt="" width="475" height="567">
+              <span class="spot dim" style="--x:2.9;--y:16.2;--w:93.9;--h:10.6;--r:10px"><span class="tap"></span><span class="tip">채점 결과 제출</span></span>
+            </div></div>
+            <div class="slide" data-step="3" data-text="방금 본 학교 시험을 눌러요. 아직 제출하지 않은 시험에는 미제출이 표시돼요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/exam-list.png" alt="" width="476" height="545">
+              <span class="spot dim" style="--x:3.8;--y:16.9;--w:93.3;--h:10.8;--r:10px"><span class="tap"></span><span class="tip">채점할 시험 고르기</span></span>
+            </div></div>
+            <div class="slide" data-step="4" data-text="먼저 전체 정답을 눌러요. 모든 문항이 O로 표시돼요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/omr.png" alt="" width="577" height="855">
+              <span class="spot dim" style="--x:61.5;--y:31.8;--w:17.3;--h:3.7;--r:999px"><span class="tap"></span><span class="tip end">전체 정답 먼저</span></span>
+            </div></div>
+            <div class="slide" data-step="4" data-text="시험지를 보면서 틀린 문제 번호만 ✕로 바꿔요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/omr.png" alt="" width="577" height="855">
+              <span class="spot dim" style="--x:50.6;--y:43.8;--w:6;--h:3.8;--r:6px"><span class="tap"></span><span class="tip">틀린 문제만 ✕</span></span>
+            </div></div>
+            <div class="slide" data-step="4" data-text="진행 숫자가 전체 문항 수와 같아지면 맨 아래 제출을 눌러요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/omr.png" alt="" width="577" height="855">
+              <span class="spot dim" style="--x:68.4;--y:15.4;--w:22.6;--h:6;--r:8px"><span class="tip end">진행 확인 후 제출</span></span>
+            </div></div>
+            <div class="slide" data-step="5" data-text="제출하면 바로 내신성적 추이 그래프에 내 점수가 나와요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/main-graph.png" alt="" width="482" height="701">
+              <span class="spot dim" style="--x:3.7;--y:46.4;--w:92.1;--h:33.8;--r:10px"><span class="tip up">시험별 내 점수</span></span>
+            </div></div>
+            <div class="slide" data-step="5" data-text="자세한 분석을 보려면 내신 분석 리포트를 눌러요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/main-graph.png" alt="" width="482" height="701">
+              <span class="spot dim" style="--x:3.7;--y:23.5;--w:92.1;--h:8.6;--r:10px"><span class="tap"></span><span class="tip">내신 분석 리포트</span></span>
+            </div></div>
+            <div class="slide" data-step="6" data-text="먼저 내 학년을 골라요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/report-grade.png" alt="" width="480" height="487">
+              <span class="spot dim" style="--x:51.5;--y:18.9;--w:45;--h:10.5;--r:10px"><span class="tap"></span><span class="tip end">내 학년</span></span>
+            </div></div>
+            <div class="slide" data-step="6" data-text="채점 결과를 제출한 시험을 눌러요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/report-exam.png" alt="" width="482" height="426">
+              <span class="spot dim" style="--x:4.1;--y:67.8;--w:91.9;--h:12;--r:10px"><span class="tap"></span><span class="tip up">제출한 시험</span></span>
+            </div></div>
+            <div class="slide" data-step="6" data-text="나의 성적 분석과 학교 기출 분석 중 보고 싶은 것을 골라요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/report-type.png" alt="" width="472" height="557">
+              <span class="spot dim" style="--x:3;--y:18;--w:46;--h:27.6;--r:10px"><span class="tap"></span><span class="tip">나의 성적 분석</span></span>
+            </div></div>
+            <div class="slide" data-step="6" data-text="나의 성적 분석에서는 내 점수, 학교 기출 문항 구성, 난이도별 정답률을 볼 수 있어요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/my-analysis.png" alt="" width="480" height="792">
+            </div></div>
+            <div class="slide" data-step="6" data-text="학교 기출 분석 탭에서는 문항 구성과 이번 시험의 출제 포인트를 볼 수 있어요." style="--slide-bg:#f3f4f6"><div class="layer">
+              <img src="app/school-analysis.png" alt="" width="476" height="796">
+              <span class="spot dim" style="--x:62;--y:5;--w:23;--h:4.4;--r:6px"><span class="tip end">학교 기출 분석 탭</span></span>
+            </div></div>
+          </div></div>
+          <button type="button" class="pbig" id="pbig" aria-label="영상 재생"></button>
+        </div>
+        <div class="pcap" aria-live="polite"><span class="n" id="pnum">1</span><div><strong id="ptitle">내신분석 메뉴 누르기</strong><span id="pdesc">edusys 앱에 로그인한 뒤 홈 화면에서 내신분석을 눌러요.</span></div></div>
+        <div class="pctl">
+          <button type="button" id="pprev">이전</button>
+          <button type="button" class="primary" id="pplay">재생</button>
+          <button type="button" id="pnext">다음</button>
+        </div>
+      </div>
+
+      <div class="steps">
+        <article class="step" id="s1">
+          <div class="step-head"><span class="n">1</span><div><h3>내신분석 메뉴 누르기</h3><p>edusys 앱에 로그인한 뒤 홈 화면에서 <span class="key">내신분석</span>을 눌러요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="1단계 화면 크게 보기"><div class="screen">
+              <img src="app/menu.png" alt="edusys 홈 화면의 내신분석 메뉴" width="472" height="552">
+              <span class="spot dim" style="--x:32.8;--y:68.8;--w:12.7;--h:12.3;--r:12px"><span class="tip">내신분석 누르기</span></span>
+            </div></button>
+          </figure>
+        </article>
+
+        <article class="step" id="s2">
+          <div class="step-head"><span class="n">2</span><div><h3>채점 결과 제출 누르기</h3><p>내신분석 첫 화면에서 <span class="key">채점 결과 제출</span>을 눌러요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="2단계 화면 크게 보기"><div class="screen">
+              <img src="app/main.png" alt="내신분석 첫 화면" width="475" height="567">
+              <span class="spot dim" style="--x:2.9;--y:16.2;--w:93.9;--h:10.6;--r:10px"><span class="tip">채점 결과 제출</span></span>
+            </div></button>
+          </figure>
+        </article>
+
+        <article class="step" id="s3">
+          <div class="step-head"><span class="n">3</span><div><h3>채점할 학교 시험 고르기</h3><p>방금 본 학교 시험을 눌러요. 아직 제출하지 않은 시험에는 <span class="key">미제출</span>이 표시돼요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="3단계 화면 크게 보기"><div class="screen">
+              <img src="app/exam-list.png" alt="채점할 시험 목록" width="476" height="545">
+              <span class="spot dim" style="--x:3.8;--y:16.9;--w:93.3;--h:10.8;--r:10px"><span class="tip">채점할 시험 고르기</span></span>
+            </div></button>
+          </figure>
+        </article>
+
+        <div class="alarm" role="note">
+          <strong>시험지를 보면서 정확하게 표시하세요!</strong>
+          <p>입력한 O·✕로 나의 성적 분석이 만들어져요.</p>
+        </div>
+
+        <article class="step" id="s4">
+          <div class="step-head"><span class="n">4</span><div><h3>문항별 O·✕ 표시하고 제출</h3><p><span class="key">전체 정답</span>을 먼저 누른 뒤, 틀린 문제만 <span class="key">✕</span>로 바꾸면 쉬워요. 다 표시했으면 맨 아래 <span class="key">제출</span>을 눌러요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="4단계 화면 크게 보기"><div class="screen">
+              <img src="app/omr.png" alt="문항별 정답 오답 체크 화면" width="577" height="855">
+              <span class="spot" style="--x:61.5;--y:31.8;--w:17.3;--h:3.7;--r:999px"><span class="n">1</span></span>
+              <span class="spot" style="--x:50.6;--y:43.8;--w:6;--h:3.8;--r:6px"><span class="n">2</span></span>
+              <span class="spot" style="--x:68.4;--y:15.4;--w:22.6;--h:6;--r:8px"><span class="n">3</span></span>
+            </div></button>
+            <ol class="legend">
+              <li><span class="n">1</span><span><b>전체 정답</b> · 먼저 눌러서 모든 문항을 O로 표시해요.</span></li>
+              <li><span class="n">2</span><span><b>✕</b> · 틀린 문제 번호만 ✕로 바꿔요.</span></li>
+              <li><span class="n">3</span><span><b>진행</b> · 표시한 문항 수예요. 전체 문항 수와 같아지면 제출해요.</span></li>
+            </ol>
+          </figure>
+        </article>
+
+        <article class="step" id="s5">
+          <div class="step-head"><span class="n">5</span><div><h3>내신 분석 리포트 누르기</h3><p>제출하면 바로 <b>내신성적 추이</b> 그래프에 내 점수가 나와요. 자세한 분석은 <span class="key">내신 분석 리포트</span>를 눌러서 봐요.</p></div></div>
+          <figure class="shot">
+            <button type="button" class="phone" data-zoom aria-label="5단계 화면 크게 보기"><div class="screen">
+              <img src="app/main-graph.png" alt="제출 후 내신분석 첫 화면" width="482" height="701">
+              <span class="spot dim" style="--x:3.7;--y:23.5;--w:92.1;--h:8.6;--r:10px"><span class="tip">내신 분석 리포트</span></span>
+            </div></button>
+          </figure>
+        </article>
+
+        <article class="step" id="s6">
+          <div class="step-head"><span class="n">6</span><div><h3>학년·시험 고르고 분석 보기</h3><p>내 <span class="key">학년</span>을 고르고, 채점 결과를 제출한 <span class="key">시험</span>을 누른 뒤, 보고 싶은 분석을 골라요.</p></div></div>
+          <div class="flow" role="list">
+            <figure class="shot" role="listitem">
+              <button type="button" class="phone" data-zoom aria-label="학년 선택 화면 크게 보기"><div class="screen">
+                <img src="app/report-grade.png" alt="학년 선택 화면" width="480" height="487">
+                <span class="spot dim" style="--x:51.5;--y:18.9;--w:45;--h:10.5;--r:10px"><span class="tip end">내 학년</span></span>
+              </div></button>
+              <figcaption>① 내 학년 고르기</figcaption>
+            </figure>
+            <figure class="shot" role="listitem">
+              <button type="button" class="phone" data-zoom aria-label="시험 선택 화면 크게 보기"><div class="screen">
+                <img src="app/report-exam.png" alt="시험 선택 화면" width="482" height="426">
+                <span class="spot dim" style="--x:4.1;--y:67.8;--w:91.9;--h:12;--r:10px"><span class="tip up">제출한 시험</span></span>
+              </div></button>
+              <figcaption>② 제출한 시험 고르기</figcaption>
+            </figure>
+            <figure class="shot" role="listitem">
+              <button type="button" class="phone" data-zoom aria-label="분석 종류 선택 화면 크게 보기"><div class="screen">
+                <img src="app/report-type.png" alt="나의 성적 분석과 학교 기출 분석 선택 화면" width="472" height="557">
+                <span class="spot" style="--x:3;--y:18;--w:46;--h:27.6;--r:10px"></span>
+                <span class="spot" style="--x:51;--y:18;--w:46;--h:27.6;--r:10px"></span>
+              </div></button>
+              <figcaption>③ 보고 싶은 분석 고르기</figcaption>
+            </figure>
+          </div>
+          <p class="flow-hint">옆으로 밀어서 다음 화면 보기 →</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="howto">
+      <p class="eyebrow">3·4단계 자세히 보기</p>
+      <h2>채점 결과 이렇게 입력해요</h2>
+
+      <div class="fields">
+        <div class="field">
+          <h3><span class="n">1</span>시험 고르기</h3>
+          <p>아직 제출하지 않은 시험은 <b>미제출</b>로 표시돼요. 회색으로 <b>OMR 없음</b>이라고 나온 시험은 아직 입력할 수 없어요.</p>
+        </div>
+        <div class="field">
+          <h3><span class="n">2</span>빠르게 표시하기</h3>
+          <p>문항마다 O나 ✕를 눌러요. 맞은 문제가 많다면 전체 정답을 먼저 누르는 게 훨씬 빨라요.</p>
+          <div class="ex">
+            <div class="ok"><b>쉬워요</b><span>전체 정답 누르기 → 틀린 3번, 11번만 ✕</span></div>
+            <div class="no"><b>오래 걸려요</b><span>1번부터 24번까지 하나씩 누르기</span></div>
+          </div>
+        </div>
+        <div class="field">
+          <h3><span class="n">3</span>진행 확인 후 제출</h3>
+          <p>화면 위의 <b>정답·오답·진행</b> 숫자로 몇 문항을 표시했는지 확인해요. 진행이 24/24처럼 전체 문항 수와 같아지면 맨 아래 제출을 눌러요.</p>
+        </div>
+      </div>
+
+      <div class="quote">
+        <strong>제출하자마자 내 성적이 그래프로 나와요</strong>
+        <p>내신분석 첫 화면의 내신성적 추이에서 시험별 점수를 막대그래프로 비교할 수 있어요. 성적은 계속 쌓여서 이전 학년 성적도 다시 볼 수 있어요.</p>
+      </div>
+    </section>
+
+    <section id="more">
+      <p class="eyebrow">필요할 때 펼쳐 보세요</p>
+      <h2>분석 리포트</h2>
+
+      <details id="summary">
+        <summary><div><h3>첫 화면 요약</h3><p>제출한 시험 수, 내신 평균, 시험별 점수</p></div></summary>
+        <div class="body">
+          <figure class="shot">
+            <button type="button" class="phone wide" data-zoom aria-label="첫 화면 요약 크게 보기"><div class="screen">
+              <img src="app/main-graph.png" alt="내신분석 첫 화면 요약" width="482" height="701" loading="lazy">
+              <span class="spot in" style="--x:3.7;--y:34.7;--w:92.1;--h:9.3;--r:10px"><span class="n">1</span></span>
+              <span class="spot in" style="--x:3.7;--y:46.4;--w:92.1;--h:33.8;--r:10px"><span class="n">2</span></span>
+            </div></button>
+            <ol class="legend">
+              <li><span class="n">1</span><span><b>제출 완료 · 내신평균 · 분석 리포트</b> · 제출한 시험 수, 내 점수 평균, 볼 수 있는 리포트 수예요.</span></li>
+              <li><span class="n">2</span><span><b>내신성적 추이</b> · 시험별 내 점수를 막대그래프로 보여줘요.</span></li>
+            </ol>
+          </figure>
+        </div>
+      </details>
+
+      <details id="mine">
+        <summary><div><h3>나의 성적 분석</h3><p>내 시험 성적을 자세히 분석한 리포트</p></div></summary>
+        <div class="body">
+          <figure class="shot">
+            <button type="button" class="phone wide" data-zoom aria-label="나의 성적 분석 크게 보기"><div class="screen">
+              <img src="app/my-analysis.png" alt="나의 성적 분석 리포트" width="480" height="792" loading="lazy">
+            </div></button>
+            <ol class="legend">
+              <li><span class="n">1</span><span><b>학생 정보</b> · 이름, 학교, 학년</span></li>
+              <li><span class="n">2</span><span><b>나의 점수</b> · 100점 만점 기준 내 점수</span></li>
+              <li><span class="n">3</span><span><b>학교 기출 문항 분석</b> · 객관식과 논서술형 문항 수와 비율</span></li>
+              <li><span class="n">4</span><span><b>난이도별 정답률</b> · 상·중·하 문항을 각각 몇 개 맞혔는지</span></li>
+            </ol>
+          </figure>
+        </div>
+      </details>
+
+      <details id="school">
+        <summary><div><h3>학교 기출 분석</h3><p>우리 학교 시험이 어떻게 출제됐는지 분석한 리포트</p></div></summary>
+        <div class="body">
+          <p>같은 학교라면 다른 학년의 학교 기출분석도 볼 수 있어요.</p>
+          <figure class="shot">
+            <button type="button" class="phone wide" data-zoom aria-label="학교 기출 분석 크게 보기"><div class="screen">
+              <img src="app/school-analysis.png" alt="학교 기출 분석 리포트" width="476" height="796" loading="lazy">
+            </div></button>
+            <ol class="legend">
+              <li><span class="n">1</span><span><b>문항 구성 및 비율 분석</b> · 객관식과 논서술형이 몇 문항씩 나왔는지</span></li>
+              <li><span class="n">2</span><span><b>출제 포인트</b> · 이번 시험에서 학교가 중점적으로 평가한 내용</span></li>
+            </ol>
+          </figure>
+        </div>
+      </details>
+    </section>
+
+    <section id="faq">
+      <p class="eyebrow">헷갈릴 때</p>
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        <details><summary>문항을 하나씩 다 눌러야 하나요?</summary><div class="body"><p>아니요. [전체 정답]을 누른 뒤 틀린 문제 번호만 ✕로 바꾸면 쉽게 입력할 수 있습니다.</p></div></details>
+        <details><summary>지난 학년 성적도 다시 볼 수 있나요?</summary><div class="body"><p>네. 나의 성적은 누적 관리되어 이전 학년의 성적도 다시 볼 수 있습니다.</p></div></details>
+        <details><summary>다른 학년의 학교 기출분석도 볼 수 있나요?</summary><div class="body"><p>같은 학교라면 전 학년의 학교 기출분석을 볼 수 있습니다.</p></div></details>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer><div class="wrap"><p>궁금한 점은 담임선생님께 물어보세요.</p></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="화면 크게 보기">
+  <div id="lb-stage"></div>
+  <button type="button" id="lb-close">닫기</button>
+</div>
+
+<script>
+(function () {
+  // 화면 크게 보기: 표시까지 그대로 복사해서 확대
+  var lb = document.getElementById('lb'), stage = document.getElementById('lb-stage');
+  document.querySelectorAll('[data-zoom]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var screen = b.querySelector('.screen').cloneNode(true);
+      var img = screen.querySelector('img');
+      var ratio = img.getAttribute('width') / img.getAttribute('height');
+      var w = Math.min(window.innerWidth - 32, (window.innerHeight - 96) * ratio, 520);
+      screen.style.width = w + 'px';
+      stage.innerHTML = ''; stage.appendChild(screen);
+      lb.hidden = false; document.getElementById('lb-close').focus();
+    });
+  });
+  function closeLb() { lb.hidden = true; stage.innerHTML = ''; }
+  lb.addEventListener('click', closeLb);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) closeLb(); });
+
+  // 따라보기 영상: 장면마다 자막 길이에 맞춰 충분히 보여주고, 표시 등장 → 탭 → 다음 장면
+  (function () {
+    var titles = ['내신분석 메뉴 누르기', '채점 결과 제출 누르기', '채점할 시험 고르기', 'O·✕ 표시하고 제출', '내신 분석 리포트', '학년·시험 고르고 분석 보기'];
+    var CUE = 600;
+    var slides = Array.prototype.slice.call(document.querySelectorAll('#player .slide'));
+    var scenes = slides.map(function (s) {
+      var text = s.getAttribute('data-text') || '';
+      var hasTap = !!s.querySelector('.tap');
+      // 읽는 시간: 기본 2.4초 + 글자당 0.11초, 최소 4.5초 / 탭 장면은 탭을 보여줄 1.2초 추가
+      var dur = Math.max(4500, 2400 + text.length * 110) + (hasTap ? 1200 : 0);
+      return { el: s, step: +s.getAttribute('data-step') - 1, text: text, dur: dur, tapAt: hasTap ? dur - 1500 : -1 };
+    });
+    var total = scenes.reduce(function (a, s) { return a + s.dur; }, 0);
+    var starts = []; scenes.reduce(function (a, s, i) { starts[i] = a; return a + s.dur; }, 0);
+    var stepRange = titles.map(function (_, k) {
+      var idx = scenes.map(function (s, i) { return s.step === k ? i : -1; }).filter(function (i) { return i >= 0; });
+      var a = starts[idx[0]], b = starts[idx[idx.length - 1]] + scenes[idx[idx.length - 1]].dur;
+      return { first: idx[0], a: a, b: b };
+    });
+    var fills = document.querySelectorAll('#pbars i');
+    var bigBtn = document.getElementById('pbig'), playBtn = document.getElementById('pplay');
+    var desc = document.getElementById('pdesc');
+    var cur = 0, t = 0, playing = false, ended = false, last = 0, tapped = false;
+
+    function fmt(ms) { var s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
+    function render() {
+      var sc = scenes[cur], now = starts[cur] + t;
+      slides.forEach(function (s, i) {
+        s.classList.toggle('on', i === cur);
+        s.classList.toggle('cue', i === cur && (t >= CUE || !playing));
+      });
+      fills.forEach(function (f, k) {
+        var r = stepRange[k];
+        f.style.width = Math.max(0, Math.min(100, (now - r.a) / (r.b - r.a) * 100)) + '%';
+      });
+      document.getElementById('pnum').textContent = sc.step + 1;
+      document.getElementById('ptitle').textContent = titles[sc.step];
+      if (desc.textContent !== sc.text) desc.textContent = sc.text;
+      document.getElementById('ptime').textContent = fmt(now) + ' / ' + fmt(total);
+      bigBtn.hidden = playing;
+      bigBtn.classList.toggle('replay', ended);
+      bigBtn.setAttribute('aria-label', ended ? '처음부터 다시 보기' : '영상 재생');
+      playBtn.textContent = playing ? '일시정지' : ended ? '다시 보기' : '재생';
+    }
+    function go(i) {
+      cur = Math.max(0, Math.min(scenes.length - 1, i)); t = 0; tapped = false; ended = false;
+      slides.forEach(function (s) { s.classList.remove('tapped'); });
+      last = performance.now();
+      render();
+    }
+    function frame(now) {
+      if (!playing) return;
+      t += Math.min(now - last, 1000); last = now;
+      var sc = scenes[cur];
+      if (!tapped && sc.tapAt >= 0 && t >= sc.tapAt) {
+        tapped = true;
+        sc.el.classList.remove('tapped'); void sc.el.offsetWidth; sc.el.classList.add('tapped');
+      }
+      if (t >= sc.dur) {
+        if (cur === scenes.length - 1) { t = sc.dur; playing = false; ended = true; render(); return; }
+        go(cur + 1);
+      }
+      render();
+      setTimeout(tick, 50);
+    }
+    function play() {
+      if (ended) go(0);
+      playing = true; last = performance.now(); render(); setTimeout(tick, 50);
+    }
+    function tick() { frame(performance.now()); }
+    function pause() { playing = false; render(); }
+
+    bigBtn.addEventListener('click', play);
+    playBtn.addEventListener('click', function () { playing ? pause() : play(); });
+    document.querySelector('#player .pscreen').addEventListener('click', function () { if (playing) pause(); });
+    document.getElementById('pprev').addEventListener('click', function () { go(cur - 1); });
+    document.getElementById('pnext').addEventListener('click', function () { go(cur + 1); });
+    document.querySelectorAll('#pbars button').forEach(function (b, k) {
+      b.addEventListener('click', function () { go(stepRange[k].first); });
+    });
+    document.addEventListener('visibilitychange', function () { if (document.hidden && playing) pause(); });
+    render();
+  })();
+
+  // 통계 탭
+  var tabs = document.querySelectorAll('[role="tab"]');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) {
+        var on = o === t;
+        o.setAttribute('aria-selected', on);
+        document.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
+
+  // 목차 링크로 접힌 섹션 열기
+  function openHash() {
+    var el = location.hash && document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  }
+  window.addEventListener('hashchange', openHash); openHash();
+
+  // 현재 위치 표시
+  var links = document.querySelectorAll('.nav a');
+  var secs = Array.prototype.map.call(links, function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var i = secs.indexOf(en.target);
+        links.forEach(function (a, j) { a.classList.toggle('on', i === j); });
+        links[i].scrollIntoView({ block: 'nearest', inline: 'center' });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>

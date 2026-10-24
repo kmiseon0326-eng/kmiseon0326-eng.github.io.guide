@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="SINCE 2000, 내신과 수능의 절대강자! 정이조영어학원 학생 이용 가이드를 한 화면에서 확인하세요.">
+<meta property="og:title" content="정이조영어학원 학생 GUIDE">
+<meta property="og:description" content="앱 설치부터 카카오 채널, 신규생 OT, 학습 시스템 가이드까지 한 곳에서.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0d0d12">
+<title>정이조영어학원 학생 GUIDE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&family=IBM+Plex+Sans+KR:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap">
+<style>
+/* Layout: one committed look — an ink-black hero with the academy's crimson, then a cool paper column of numbered guide cards (01–06 is the real order to follow). */
+:root {
+  --ink: #0d0d12;
+  --ink-2: #191920;
+  --ink-line: rgba(255, 255, 255, .12);
+  --paper: #f5f0e4;
+  --card: #ffffff;
+  --text: #16161c;
+  --muted: #62626f;
+  --line: #e7ddc6;
+  --crimson: #c4161c;
+  --crimson-deep: #8f0f14;
+  --crimson-soft: #fbe9ea;
+  --gold: #e9c46a;
+  --font-display: "Noto Serif KR", "Apple SD Gothic Neo", serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-num: "Montserrat", "IBM Plex Sans KR", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--paper); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; word-break: keep-all; -webkit-tap-highlight-color: transparent; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+:focus-visible { outline: 3px solid var(--crimson); outline-offset: 3px; border-radius: 10px; }
+.wrap { max-width: 560px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+
+/* HERO */
+.hero { position: relative; overflow: hidden; background: linear-gradient(165deg, #2a2110 0%, #14110b 38%, #0d0c0a 62%, #241b0c 100%); color: #f7f1e1; }
+.hero::before { content: ""; position: absolute; width: 560px; height: 560px; right: -260px; top: -240px; border-radius: 50%; background: radial-gradient(closest-side, rgba(233, 196, 106, .42), transparent 70%); pointer-events: none; }
+.hero::after { content: ""; position: absolute; width: 420px; height: 420px; left: -220px; bottom: -200px; border-radius: 50%; background: radial-gradient(closest-side, rgba(201, 150, 56, .3), transparent 70%); pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; padding-block: 28px 34px; display: grid; gap: 22px; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand img { width: 38px; height: 38px; border-radius: 6px; background: #fff; padding: 2px; }
+.brand span { display: grid; line-height: 1.25; }
+.brand small { font-size: 11px; color: var(--gold); letter-spacing: .02em; }
+.brand b { font-size: 15px; font-weight: 700; }
+.since { display: flex; align-items: center; gap: 10px; font-family: var(--font-num); font-weight: 700; font-size: 12px; letter-spacing: .22em; color: var(--gold); }
+.since::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
+.hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(34px, 10vw, 52px); line-height: 1.15; letter-spacing: -.02em; }
+.hero h1 em { font-style: normal; display: block; font-family: var(--font-num); font-weight: 800; letter-spacing: .02em; font-size: 1.12em; background: linear-gradient(100deg, #fff4cc 0%, #f1d27a 30%, #c99a3a 58%, #f7e3a3 82%, #b8862c 100%); background-size: 200% 100%; animation: goldshine 6s ease-in-out infinite; -webkit-background-clip: text; background-clip: text; color: transparent; padding: .04em 0; }
+.hero .claim { justify-self: start; font-family: var(--font-display); font-weight: 900; font-size: 21px; background: linear-gradient(100deg, #f7e3a3 0%, #e9c46a 45%, #c99a3a 100%); -webkit-background-clip: text; background-clip: text; color: transparent; padding: .04em 0; }
+.hero .claim b { font-weight: 900; }
+.hero .lead { font-size: 15px; color: #d6ccb4; }
+
+.film { position: relative; display: block; border-radius: 18px; overflow: hidden; border: 1px solid rgba(233, 196, 106, .35); box-shadow: 0 24px 60px rgba(0, 0, 0, .5); }
+.film img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.film .shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, .78)); }
+.film .play { position: absolute; left: 50%; top: 44%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: var(--crimson); display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(196, 22, 28, .25); animation: pulse 2.4s ease-out infinite; }
+.film .play::after { content: ""; margin-left: 5px; border-left: 20px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.film .cap { position: absolute; left: 16px; right: 16px; bottom: 12px; display: flex; justify-content: space-between; align-items: end; gap: 10px; color: #fff; }
+.film .cap b { font-family: var(--font-display); font-size: 17px; }
+.film .cap span { font-family: var(--font-num); font-size: 11px; letter-spacing: .12em; opacity: .85; white-space: nowrap; }
+@keyframes goldshine { 0%, 100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(196, 22, 28, .5); } 100% { box-shadow: 0 0 0 18px rgba(196, 22, 28, 0); } }
+
+.jump { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.jump a { display: grid; gap: 2px; justify-items: center; text-align: center; padding: 12px 6px; border-radius: 14px; border: 1px solid rgba(233, 196, 106, .28); background: rgba(233, 196, 106, .06); font-size: 12.5px; line-height: 1.3; color: #e7e5ec; }
+.jump a .num { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: .1em; }
+.jump a:active { background: rgba(255, 255, 255, .1); }
+
+/* SECTIONS */
+main .wrap { display: grid; gap: 36px; padding-block: 34px 28px; }
+.group { display: grid; gap: 14px; scroll-margin-top: 16px; }
+.group-head { display: grid; gap: 4px; }
+.group-head .eyebrow { font-family: var(--font-num); font-weight: 700; font-size: 12px; letter-spacing: .2em; color: var(--crimson); }
+.group-head h2 { font-family: var(--font-display); font-weight: 900; font-size: 26px; letter-spacing: -.02em; }
+.group-head p { font-size: 14px; color: var(--muted); }
+
+.card { position: relative; display: grid; gap: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 18px; scroll-margin-top: 16px; transition: transform .15s ease, box-shadow .2s ease; }
+a.card:active, .card a.go:active { transform: scale(.985); }
+.card-top { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; align-items: center; }
+.tile { width: 64px; height: 64px; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; }
+.tile img { width: 100%; height: 100%; object-fit: cover; }
+.tile.round img { border-radius: 16px; }
+.meta { display: grid; gap: 2px; min-width: 0; }
+.meta .no { font-family: var(--font-num); font-weight: 800; font-size: 12px; letter-spacing: .14em; color: var(--crimson); }
+.meta h3 { font-size: 18px; font-weight: 700; line-height: 1.35; }
+.meta p { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+.arrow { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 16px; font-family: var(--font-num); }
+.badge-new { position: absolute; top: -9px; right: 16px; font-family: var(--font-num); font-weight: 800; font-size: 11px; letter-spacing: .1em; color: #fff; background: var(--crimson); padding: 4px 10px; border-radius: 999px; box-shadow: 0 6px 16px rgba(196, 22, 28, .35); }
+.kind { display: inline-flex; align-items: center; gap: 6px; justify-self: start; font-family: var(--font-num); font-weight: 700; font-size: 11px; letter-spacing: .12em; color: var(--muted); padding: 4px 10px; border-radius: 999px; background: var(--paper); }
+.kind.video { color: var(--crimson); background: var(--crimson-soft); }
+.thumb { position: relative; border-radius: 14px; overflow: hidden; }
+.thumb img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.thumb::after { content: ""; position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%; background: rgba(13, 13, 18, .78); }
+.thumb::before { content: ""; position: absolute; left: 50%; top: 50%; z-index: 1; margin: -10px 0 0 -5px; border-left: 16px solid #fff; border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+
+/* App usage card */
+.app-card .lead { font-size: 15px; line-height: 1.6; }
+.app-card .lead b { color: var(--crimson); }
+.menu-label { display: inline-block; justify-self: start; font-weight: 700; font-size: 13px; color: #fff; background: var(--ink); padding: 5px 14px; border-radius: 999px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { font-size: 13px; padding: 5px 11px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); }
+.chips span.hot { background: var(--crimson-soft); border-color: #f2c4c6; color: var(--crimson-deep); font-weight: 700; }
+.phone-shot { justify-self: center; width: min(100%, 300px); padding: 7px; border-radius: 26px; background: var(--ink); box-shadow: 0 16px 36px rgba(13, 13, 18, .2); }
+.phone-shot img { border-radius: 20px; }
+.subs-title { font-weight: 700; font-size: 15px; }
+.subs { display: grid; gap: 8px; }
+.go { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 14px; background: var(--ink); color: #fff; transition: transform .15s ease; }
+.go .num { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: .1em; }
+.go b { font-size: 16px; }
+.go small { display: block; font-size: 12px; color: #b9b7c2; font-weight: 400; }
+.go i { font-style: normal; font-family: var(--font-num); }
+
+/* Optimus card */
+.opt { background: radial-gradient(120% 120% at 100% 0%, #3a2a8a 0%, #12123a 45%, #0b0b20 100%); border-color: #1f1f45; color: #fff; }
+.opt .meta p { color: #b8bce6; }
+.opt .meta .no { color: #ffb3b6; }
+.opt .tile { border-color: rgba(255, 255, 255, .2); }
+.opt .arrow { background: #fff; color: var(--ink); }
+.opt .kind { background: rgba(255, 255, 255, .1); color: #d6d8ff; }
+.opt .big { font-family: var(--font-num); font-weight: 800; font-size: 40px; line-height: 1; letter-spacing: -.03em; background: linear-gradient(95deg, #2f8cff, #9b4dff); -webkit-background-clip: text; background-clip: text; color: transparent; padding: .06em 0; }
+.opt .big small { font-family: var(--font-body); font-size: 15px; font-weight: 700; color: var(--gold); -webkit-text-fill-color: var(--gold); margin-left: 8px; letter-spacing: 0; }
+
+footer { background: var(--ink); color: #9d9ba8; }
+footer .wrap { padding-block: 28px calc(28px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 10px; justify-items: center; text-align: center; font-size: 13px; }
+footer img { width: 34px; height: 34px; border-radius: 6px; background: #fff; padding: 2px; }
+footer b { color: #f4f2ee; font-size: 14px; }
+
+/* Entrance: elements start visible-ish and settle in */
+.rise { animation: rise .7s cubic-bezier(.2, .8, .2, 1) both; }
+.d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; } .d4 { animation-delay: .35s; } .d5 { animation-delay: .45s; }
+@keyframes rise { from { opacity: .3; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .rise, .film .play, .hero h1 em { animation: none; } html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+@media (max-width: 360px) { .jump { grid-template-columns: repeat(2, 1fr); } .card-top { grid-template-columns: 56px 1fr auto; } .tile { width: 56px; height: 56px; } }
+</style>
+<style>:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); background: #0d0d12; }</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="brand rise d1"><img src="img/logo.png" alt="" width="145" height="140"><span><small>기본과 디테일에 강한</small><b>정이조 영어학원</b></span></div>
+    <p class="since rise d1">SINCE 2000 · STUDENT GUIDE</p>
+    <h1 class="rise d2">정이조영어학원<em>학생 GUIDE</em></h1>
+    <p class="claim rise d3">내신과 수능의 <b>절대강자!</b></p>
+    <p class="lead rise d3">압도적인 초격차 시스템으로 확실한 결과를 만드는 정이조영어학원입니다. 학생 여러분의 원활한 학원 생활을 돕는 이용 가이드를 확인해 보세요.</p>
+    <a class="film rise d4" href="https://youtu.be/VmMIGjejKkY" target="_blank" rel="noopener">
+      <img src="img/thumb-promise.png" alt="정이조 영어학원이 약속합니다 영상" width="356" height="200">
+      <span class="shade"></span><span class="play" aria-hidden="true"></span>
+      <span class="cap"><b>정이조 영어학원이 약속합니다</b><span>WATCH ▶</span></span>
+    </a>
+    <nav class="jump rise d5" aria-label="가이드 바로가기">
+      <a href="#g1"><span class="num">01</span>앱 설치</a>
+      <a href="#g2"><span class="num">02</span>카카오 채널</a>
+      <a href="#g3"><span class="num">03</span>신규생 OT</a>
+      <a href="#g4"><span class="num">04</span>앱 사용법</a>
+      <a href="#g5"><span class="num">05</span>EDUTEST</a>
+      <a href="#g6"><span class="num">06</span>수능 옵티머스</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="group" id="essentials">
+      <div class="group-head">
+        <p class="eyebrow">ESSENTIALS</p>
+        <h2>필수 · 기본 안내</h2>
+        <p>처음 등록했다면 01부터 03까지 차례대로 꼭 해 주세요.</p>
+      </div>
+
+      <a class="card" id="g1" href="app-install-guide/">
+        <div class="card-top">
+          <div class="tile round"><img src="img/icon-edusys.png" alt="" width="300" height="303"></div>
+          <div class="meta"><span class="no">01</span><h3>에듀시스 앱 설치 (다운로드)</h3><p>앱을 설치하고 로그인하는 방법</p></div>
+          <span class="arrow" aria-hidden="true">→</span>
+        </div>
+        <span class="kind">WEB GUIDE</span>
+      </a>
+
+      <a class="card" id="g2" href="kakao-guide/">
+        <div class="card-top">
+          <div class="tile round"><img src="img/icon-kakao.png" alt="" width="300" height="300"></div>
+          <div class="meta"><span class="no">02</span><h3>카카오톡 채널 추가</h3><p>학원의 다양한 소식을 카카오톡으로 받아요</p></div>
+          <span class="arrow" aria-hidden="true">→</span>
+        </div>
+        <span class="kind">WEB GUIDE</span>
+      </a>
+
+      <a class="card" id="g3" href="https://youtu.be/RWMEIhs5Yrg" target="_blank" rel="noopener">
+        <span class="badge-new">NEW</span>
+        <div class="card-top">
+          <div class="tile"><img src="img/girl.png" alt="" width="400" height="400"></div>
+          <div class="meta"><span class="no">03</span><h3>신규생 OT 가이드</h3><p>처음 온 학생을 위한 오리엔테이션 영상</p></div>
+          <span class="arrow" aria-hidden="true">▶</span>
+        </div>
+        <div class="thumb"><img src="img/thumb-ot.jpg" alt="정이조영어학원 신규생 오리엔테이션 영상" width="854" height="480" loading="lazy"></div>
+        <span class="kind video">VIDEO · YOUTUBE</span>
+      </a>
+    </section>
+
+    <section class="group" id="learning">
+      <div class="group-head">
+        <p class="eyebrow">LEARNING &amp; SERVICE</p>
+        <h2>주요 학습 · 서비스 가이드</h2>
+        <p>학원 공부를 더 똑똑하게 만드는 학습 시스템이에요.</p>
+      </div>
+
+      <article class="card app-card" id="g4">
+        <div class="card-top">
+          <div class="tile round"><img src="img/icon-edusys.png" alt="" width="300" height="303"></div>
+          <div class="meta"><span class="no">04</span><h3>에듀시스 앱 사용법</h3><p>메뉴별 사용 안내</p></div>
+          <span></span>
+        </div>
+        <p class="lead"><b>EDUSYS APP</b>은 학습의 모든 과정을 하나로 연결하여 학생의 성장을 체계적으로 관리합니다.</p>
+        <span class="menu-label">APP 메뉴</span>
+        <div class="chips">
+          <span>알림장</span><span>출석부</span><span>성적</span><span>포인트</span><span>푸쉬메시지</span><span>교재주문</span><span>채팅</span><span class="hot">완공</span><span class="hot">더공</span><span class="hot">내신분석</span>
+        </div>
+        <figure class="phone-shot" style="margin:0"><img src="img/app-home.png" alt="edusys 앱 홈 화면 메뉴" width="800" height="772" loading="lazy"></figure>
+        <p class="subs-title">앱 메뉴 사용 안내</p>
+        <div class="subs">
+          <a class="go" href="wangong-guide/"><span class="num">A</span><span><b>완공</b><small>학원에서 공부 시간 기록과 학습현황 제출</small></span><i aria-hidden="true">→</i></a>
+          <a class="go" href="deogong-guide/"><span class="num">B</span><span><b>더공</b><small>도서관·집에서 스스로 공부할 때 플래너와 타이머</small></span><i aria-hidden="true">→</i></a>
+          <a class="go" href="naesin-guide/"><span class="num">C</span><span><b>내신분석</b><small>학교 시험 후 성적 분석과 학교 기출 분석</small></span><i aria-hidden="true">→</i></a>
+        </div>
+      </article>
+
+      <a class="card" id="g5" href="https://youtu.be/elf61r1HFiQ" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div class="tile"><img src="img/icon-edutest.png" alt="" width="320" height="281"></div>
+          <div class="meta"><span class="no">05</span><h3>EDUTEST 이용 가이드</h3><p>온라인 테스트 &amp; 데이터 분석 시스템 소개</p></div>
+          <span class="arrow" aria-hidden="true">▶</span>
+        </div>
+        <div class="thumb"><img src="img/thumb-edutest.jpg" alt="메타인지 에듀테스트 학생화면 소개 영상" width="854" height="480" loading="lazy"></div>
+        <span class="kind video">VIDEO · YOUTUBE</span>
+      </a>
+
+      <a class="card opt" id="g6" href="optimus-guide/">
+        <div class="card-top">
+          <div class="tile"><img src="img/robot.png" alt="" width="400" height="400"></div>
+          <div class="meta"><span class="no">06</span><h3>수능 옵티머스 이용 가이드</h3><p>수능 1등급을 위한 AI 완전학습 시스템</p></div>
+          <span class="arrow" aria-hidden="true">→</span>
+        </div>
+        <p class="big num">18,000+<small>압도적인 문항수</small></p>
+        <span class="kind">WEB GUIDE</span>
+      </a>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="img/logo.png" alt="" width="145" height="140">
+    <b>정이조 영어학원 · BLACK CAMPUS</b>
+    <p>궁금한 점은 학원 상담실로 문의해 주세요.</p>
+  </div>
+</footer>
+
+</body>
+</html>
